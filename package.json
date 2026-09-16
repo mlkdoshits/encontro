@@ -1,0 +1,11 @@
+{
+  "name": "convite-encontro",
+  "version": "1.0.0",
+  "description": "Site de convite romântico",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
