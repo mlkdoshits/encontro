@@ -3,113 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Um convite especial para você ❤️</title>
+    <title>Aceita sair comigo? ❤️</title>
+
+    <!-- METATAGS PARA PRÉVIA DO LINK (WHATSAPP / REDES SOCIAIS) -->
+    <meta property="og:title" content="Aceita sair comigo? ☕">
+    <meta property="og:description" content="Pensei com carinho em um lugar legal pra gente conversar. Escolha a data!">
+    <meta property="og:image" content="https://seu-link-do-render.onrender.com/casal.png">
+    <meta property="og:url" content="https://seu-link-do-render.onrender.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aceita sair comigo? ☕">
+    <meta name="twitter:description" content="Pensei com carinho em um lugar legal pra gente conversar. Escolha a data!">
+    <meta name="twitter:image" content="https://seu-link-do-render.onrender.com/casal.png">
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            height: 100vh;
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            text-align: center; 
             margin: 0;
+            padding: 40px 20px; 
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); 
+            min-height: 100vh;
+            box-sizing: border-box;
+            user-select: none;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #333;
         }
+
         .card {
             background: white;
-            padding: 30px 40px;
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            max-width: 480px;
+            width: 100%;
+            position: relative;
         }
-        h1 {
-            color: #ff4757;
-            font-size: 24px;
-            margin-bottom: 10px;
+        
+        .meme-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            object-fit: cover;
         }
-        p {
-            color: #666;
-            font-size: 16px;
+
+        h1 { 
+            font-size: 2rem; 
+            color: #ff4757; 
             margin-bottom: 20px;
         }
-        .calendar-section {
-            margin-top: 20px;
-            background: #fff5f5;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px dashed #ff4757;
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 25px;
+            height: 120px; 
+            position: relative;
         }
+        
+        button { 
+            font-size: 1.3rem; 
+            padding: 12px 30px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 50px; 
+            color: white; 
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .sim { background: #28a745; }
+        
+        .nao { 
+            background: #dc3545; 
+            position: absolute;
+            right: 20px; 
+            top: 20px;
+            touch-action: none;
+        }
+        
+        #status { 
+            font-size: 1.1rem; 
+            color: #222; 
+            font-weight: bold;
+            min-height: 40px;
+            padding: 10px;
+            border-radius: 12px;
+            background: transparent;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .sugestao-container {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+        
+        p { color: #666; font-size: 1rem; margin-bottom: 12px; }
+        
+        .input-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
         input[type="date"] {
             padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            width: 80%;
-            margin-top: 10px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-weight: bold;
             outline: none;
+            color: #444;
         }
-        button {
-            background-color: #ff4757;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: bold;
-            transition: 0.2s;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #ff6b81;
-            transform: scale(1.02);
-        }
-        #mensagem-sucesso {
-            margin-top: 15px;
-            color: #2ed573;
-            font-weight: bold;
-            display: none;
+        
+        .btn-data { 
+            background: #ff6b81; 
+            font-size: 1rem; 
+            padding: 10px 18px; 
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>Aceita sair comigo? ☕</h1>
-        <p>Pensei com carinho em um lugar legal pra gente conversar, rir e passar um tempo juntos. Que tal?</p>
+    <div class="card" id="site-card">
+        <!-- Substitua pelo link de uma imagem bonitinha ou meme se quiser -->
+        <img src="casal.png" alt="Convite Especial" class="meme-img" id="imagem-topo">
         
-        <div class="calendar-section">
-            <label for="data-encontro"><strong>Escolha o melhor dia para você:</strong></label><br>
-            <input type="date" id="data-encontro">
-            <br>
-            <button onclick="enviarResposta()">Confirmar Data 💖</button>
+        <h1>Quer sair comigo? ☕</h1>
+        
+        <div class="btn-container" id="area-botoes">
+            <div style="position: absolute; left: 20px; top: 20px;">
+                <button class="sim" id="btn-sim-clique">Sim! 🥰</button>
+            </div>
+            <button class="nao" id="btn-nao">Não 🙄</button>
         </div>
 
-        <p id="mensagem-sucesso">Oba! Data salva. Agora me manda print ou me avisa no WhatsApp! 🥰</p>
+        <div id="status"></div>
+
+        <div class="sugestao-container">
+            <p>Se aceitar, escolha o melhor dia para o nosso encontro:</p>
+            <div class="input-group">
+                <input type="date" id="data-input">
+                <button class="btn-data" id="btn-data-clique">Confirmar 💖</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        function enviarResposta() {
-            const dataInput = document.getElementById('data-encontro').value;
-            const mensagem = document.getElementById('mensagem-sucesso');
+        const btnSim = document.getElementById('btn-sim-clique');
+        const btnNao = document.getElementById('btn-nao');
+        const btnData = document.getElementById('btn-data-clique');
+        const areaBotoes = document.getElementById('area-botoes');
+        const dataInput = document.getElementById('data-input');
+        const statusDiv = document.getElementById('status');
+
+        function fugirDoAmigo(evento) {
+            if(evento) evento.preventDefault();
+            const larguraContainer = areaBotoes.offsetWidth - btnNao.offsetWidth;
+            const alturaContainer = areaBotoes.offsetHeight - btnNao.offsetHeight;
             
-            if (!dataInput) {
-                alert('Por favor, selecione uma data no calendário primeiro! 😉');
-                return;
+            let novoX = Math.random() * larguraContainer;
+            let novoY = Math.random() * alturaContainer;
+            
+            if (novoX < 140) {
+                novoX = 140 + (Math.random() * (larguraContainer - 140));
             }
+            
+            if (novoY > 40) {
+                novoY = Math.random() * 40;
+            }
+            
+            btnNao.style.right = 'auto';
+            btnNao.style.left = novoX + 'px';
+            btnNao.style.top = novoY + 'px';
+        }
 
-            // Formata a data de AAAA-MM-DD para DD/MM/AAAA
-            const partes = dataInput.split('-');
-            const dataFormatada = `${partes[2]}/${partes[1]}/${partes[0]}`;
+        btnNao.addEventListener('mouseover', fugirDoAmigo);
+        btnNao.addEventListener('pointerdown', fugirDoAmigo);
+        btnNao.addEventListener('touchstart', fugirDoAmigo);
 
-            // Exibe a mensagem de sucesso na tela
-            mensagem.style.display = 'block';
-            mensagem.innerHTML = `Perfeito! Dia ${dataFormatada} confirmado! 🥳<br>Tira um print dessa tela e me manda no WhatsApp!`;
+        btnSim.addEventListener('click', () => {
+            statusDiv.innerHTML = "🎉 Ebaaa! Sabia que diria sim! Escolha a data abaixo e me avise! 🥰✨";
+            statusDiv.style.color = "#155724";
+            statusDiv.style.backgroundColor = "#d4edda";
+            statusDiv.style.border = "1px solid #c3e6cb";
+            resgatarBotaoNao();
+        });
+
+        btnNao.addEventListener('click', (e) => {
+            e.preventDefault();
+            fugirDoAmigo(e);
+            statusDiv.innerHTML = "⚠️ O botão de não está quebrado! Tente clicar em Sim! 🏃‍♂️💨";
+            statusDiv.style.color = "#856404";
+            statusDiv.style.backgroundColor = "#fff3cd";
+            statusDiv.style.border = "1px solid #ffeeba";
+        });
+
+        btnData.addEventListener('click', () => {
+            const dataValor = dataInput.value;
+            
+            if(dataValor) {
+                const partes = dataValor.split('-');
+                const dataFormatada = `${partes[2]}/${partes[1]}/${partes[0]}`;
+
+                statusDiv.innerHTML = `📅 Encontro marcado para o dia ${dataFormatada}! Tira print e me manda! 🥂💖`;
+                statusDiv.style.color = "#155724";
+                statusDiv.style.backgroundColor = "#d4edda";
+                statusDiv.style.border = "1px solid #c3e6cb";
+            } else {
+                statusDiv.innerHTML = "⚠️ Por favor, selecione uma data no calendário primeiro!";
+                statusDiv.style.color = "#721c24";
+                statusDiv.style.backgroundColor = "#f8d7da";
+                statusDiv.style.border = "1px solid #f5c6cb";
+            }
+        });
+
+        function resgatarBotaoNao() {
+            btnNao.style.left = 'auto';
+            btnNao.style.top = '20px';
+            btnNao.style.right = '20px';
         }
     </script>
-
 </body>
 </html>
