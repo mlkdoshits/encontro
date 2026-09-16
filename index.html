@@ -187,7 +187,7 @@
         </div>
 
         <!-- ETAPA 3: Calendário -->
-        <div id="step-3" class="step">
+        <div id="step-3" class="step hidden">
             <div class="emoji-container">📅</div>
             <h2>QUANDO VOCÊ TÁ LIVRE?</h2>
             <p class="subtitle">Escolha a data e o horário</p>
@@ -277,7 +277,6 @@
         }
 
         function selecionarOpcao(elemento, tipo) {
-            // Remove seleção anterior do mesmo grupo
             elemento.parentNode.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
             elemento.classList.add('selected');
             dadosDate[tipo] = elemento.innerText.trim();
@@ -289,7 +288,6 @@
                 return;
             }
             if(proximoPasso === 6) {
-                // Preenche o resumo final
                 document.getElementById('res-data').innerText = dadosDate.data;
                 document.getElementById('res-hora').innerText = dadosDate.hora;
                 document.getElementById('res-comida').innerText = dadosDate.comida;
@@ -299,8 +297,7 @@
         }
 
         function enviarWhatsApp() {
-            // Substitua pelo seu número de WhatsApp com DDI e DDD (Ex: 5511999999999)
-            const meuNumero = "5551999999999"; 
+            const meuNumero = "5551989511370"; 
             const texto = `Oie! Eu aceito o date! 🤍%0A📅 Data: ${dadosDate.data} às ${dadosDate.hora}%0A🍽️ Comida: ${dadosDate.comida}%0A✨ Vibe: ${dadosDate.vibe}`;
             window.open(`https://api.whatsapp.com/send?phone=${meuNumero}&text=${texto}`, '_blank');
         }
