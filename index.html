@@ -3,236 +3,1888 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aceita sair comigo? ❤️</title>
-
-    <!-- METATAGS PARA PRÉVIA DO LINK (WHATSAPP / REDES SOCIAIS) -->
-    <meta property="og:title" content="Aceita sair comigo? ☕">
-    <meta property="og:description" content="Pensei com carinho em um lugar legal pra gente conversar. Escolha a data!">
-    <meta property="og:image" content="https://seu-link-do-render.onrender.com/casal.png">
-    <meta property="og:url" content="https://seu-link-do-render.onrender.com/">
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Aceita sair comigo? ☕">
-    <meta name="twitter:description" content="Pensei com carinho em um lugar legal pra gente conversar. Escolha a data!">
-    <meta name="twitter:image" content="https://seu-link-do-render.onrender.com/casal.png">
-
+    <title>MarketPlace Forum Network</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            text-align: center; 
+        /* styles.css */
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap');
+
+        /* --- VARIÁVEIS DE TEMA --- */
+        body.dark-theme {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --header-bg: #161b22;
+            --text-color: #00ff66;
+            --text-muted: #00b347;
+            --border-color: #00ff6633;
+            --primary-color: #00ff66;
+            --primary-btn-text: #0d1117;
+            --secondary-color: #21262d;
+            --secondary-btn-text: #00ff66;
+            --danger-color: #ff3333;
+            --input-bg: #0d1117;
+            --box-shadow: 0 0 10px rgba(0, 255, 102, 0.15);
+        }
+
+        body.light-theme {
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --text-color: #333333;
+            --text-muted: #6c757d;
+            --border-color: #dddddd;
+            --primary-color: #007bff;
+            --primary-btn-text: #ffffff;
+            --secondary-color: #6c757d;
+            --secondary-btn-text: #ffffff;
+            --danger-color: #dc3545;
+            --input-bg: #ffffff;
+            --box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        :root {
+            --border-radius: 6px;
+            --transition: all 0.2s ease-in-out;
+        }
+
+        * {
             margin: 0;
-            padding: 40px 20px; 
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); 
-            min-height: 100vh;
+            padding: 0;
             box-sizing: border-box;
-            user-select: none;
-            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Fira Code', Consolas, Monaco, 'Courier New', monospace;
+            font-size: 88%;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--bg-color);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        /* Container Principal */
+        .container {
+            width: 90%;
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* =========================================
+           HEADER & NAVEGAÇÃO
+           ========================================= */
+        header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .logo h2 {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        #main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 8px;
             align-items: center;
         }
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            max-width: 480px;
-            width: 100%;
-            position: relative;
-        }
-        
-        .meme-img {
-            max-width: 100%;
-            height: auto;
-            max-height: 200px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            object-fit: cover;
+        #main-nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: var(--border-radius);
+            border: 1px solid transparent;
+            transition: var(--transition);
+            white-space: nowrap;
         }
 
-        h1 { 
-            font-size: 2rem; 
-            color: #ff4757; 
-            margin-bottom: 20px;
+        #main-nav a:hover, 
+        #main-nav a.active {
+            background-color: var(--secondary-color);
+            border-color: var(--border-color);
+            color: var(--primary-color);
         }
-        
-        .btn-container {
+
+        /* ÁREA DE AÇÕES (IDIOMA, TEMA E LOGIN) */
+        .auth-section {
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 30px;
-            margin-bottom: 25px;
-            height: 120px; 
-            position: relative;
-        }
-        
-        button { 
-            font-size: 1.3rem; 
-            padding: 12px 30px; 
-            cursor: pointer; 
-            border: none; 
-            border-radius: 50px; 
-            color: white; 
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-        }
-        
-        .sim { background: #28a745; }
-        
-        .nao { 
-            background: #dc3545; 
-            position: absolute;
-            right: 20px; 
-            top: 20px;
-            touch-action: none;
-        }
-        
-        #status { 
-            font-size: 1.1rem; 
-            color: #222; 
-            font-weight: bold;
-            min-height: 40px;
-            padding: 10px;
-            border-radius: 12px;
-            background: transparent;
-            margin-bottom: 15px;
-            transition: all 0.2s ease;
-        }
-
-        .sugestao-container {
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-            margin-top: 10px;
-        }
-        
-        p { color: #666; font-size: 1rem; margin-bottom: 12px; }
-        
-        .input-group {
-            display: flex;
-            justify-content: center;
             gap: 10px;
         }
-        
-        input[type="date"] {
-            padding: 10px;
-            font-size: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-weight: bold;
+
+        /* Seletor de Idioma */
+        .lang-select {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            padding: 6px 8px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
             outline: none;
-            color: #444;
         }
-        
-        .btn-data { 
-            background: #ff6b81; 
-            font-size: 1rem; 
-            padding: 10px 18px; 
+
+        /* Botão Alternar Tema Sol/Lua */
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            box-shadow: var(--box-shadow);
+            transform: scale(1.05);
+        }
+
+        /* Usuário Logado */
+        #user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        #user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Botões Padronizados */
+        .btn {
+            padding: 7px 14px;
+            font-size: 0.82rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--primary-btn-text);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--secondary-btn-text);
+        }
+
+        .btn-danger {
+            background-color: transparent;
+            color: var(--danger-color);
+            border-color: var(--danger-color);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            box-shadow: var(--box-shadow);
+            transform: translateY(-1px);
+        }
+
+        /* =========================================
+           MODAIS
+           ========================================= */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            margin: 5% auto;
+            padding: 24px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 440px;
+            position: relative;
+            box-shadow: var(--box-shadow);
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: modalOpen 0.2s ease-out;
+        }
+
+        @keyframes modalOpen {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 18px;
+            color: var(--text-muted);
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: var(--primary-color);
+        }
+
+        .modal-content h2 {
+            font-size: 1.15rem;
+            margin-bottom: 18px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Formulários e Inputs */
+        input, select, textarea {
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            padding: 9px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 0.85rem;
+            width: 100%;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: var(--box-shadow);
+        }
+
+        .error-message {
+            color: var(--danger-color);
+            text-align: center;
+            margin-top: 8px;
+            font-size: 0.8rem;
+        }
+
+        /* Painel Admin */
+        .admin-modal {
+            max-width: 750px;
+        }
+
+        .admin-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-card h3 {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+        }
+
+        .admin-section {
+            margin-bottom: 20px;
+        }
+
+        .admin-section h3 {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+        }
+
+        .posts-list, .users-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .post-card, .user-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        /* =========================================
+           ESTILOS DE PÁGINAS E CONTEÚDO
+           ========================================= */
+        .page {
+            display: none;
+            padding: 24px 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Home / Hero */
+        .hero {
+            text-align: center;
+            padding: 20px 0 30px 0;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* Formulário de Criação */
+        #post-form {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Feed & Filtros */
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .posts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .post-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .post-content {
+            padding: 16px;
+        }
+
+        .post-title {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .post-category {
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+
+        .post-description {
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: var(--text-color);
+        }
+
+        .post-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        .post-phone {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        /* Fórum (Reddit Style) */
+        .forum-create-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 24px;
+        }
+
+        .forum-create-box h3 {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+
+        .forum-create-box form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .forum-topic-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .topic-title {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .topic-content {
+            font-size: 0.88rem;
+            color: var(--text-color);
+            margin-bottom: 12px;
+            white-space: pre-line;
+        }
+
+        .topic-actions {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .replies-container {
+            margin-top: 12px;
+            padding-left: 12px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .reply-item {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            margin-bottom: 8px;
+        }
+
+        .reply-header {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .reply-text {
+            font-size: 0.82rem;
+            color: var(--text-color);
+        }
+
+        .reply-form {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .reply-form input {
+            flex: 1;
+        }
+
+        /* Perfil */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .posts-section h3 {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Seção de Recursos (Cards) */
+        .features {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--box-shadow);
+        }
+
+        .feature-card i {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .feature-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .feature-card p {
+            font-size: 0.8rem;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding: 14px 0;
+            margin-top: auto;
+        }
+
+        footer p {
+            text-align: center;
+        }
+
+        /* Ações do Proprietário (Editar/Excluir) */
+        .owner-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .owner-actions .btn {
+            padding: 4px 10px;
+            font-size: 0.75rem;
+        }
+
+        /* =========================================
+           RESPONSIVIDADE (MOBILE / TABLET)
+           ========================================= */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            #main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .auth-section {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .feed-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .admin-stats {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
-<body>
-
-    <div class="card" id="site-card">
-        <!-- Substitua pelo link de uma imagem bonitinha ou meme se quiser -->
-        <img src="casal.png" alt="Convite Especial" class="meme-img" id="imagem-topo">
-        
-        <h1>Quer sair comigo? ☕</h1>
-        
-        <div class="btn-container" id="area-botoes">
-            <div style="position: absolute; left: 20px; top: 20px;">
-                <button class="sim" id="btn-sim-clique">Sim! 🥰</button>
+<body class="dark-theme">
+    <!-- Cabeçalho com Navegação -->
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <h2><i class="fas fa-terminal"></i> MarketForum</h2>
             </div>
-            <button class="nao" id="btn-nao">Não 🙄</button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#" id="home-link" data-i18n="navHome">Início</a></li>
+                    <li><a href="#" id="create-post-link" data-i18n="navCreate">Criar Anúncio</a></li>
+                    <li><a href="#" id="feed-link" data-i18n="navFeed">Anúncios</a></li>
+                    <li><a href="#" id="forum-link" data-i18n="navForum">Fórum</a></li>
+                    <li><a href="#" id="profile-link" data-i18n="navProfile">Perfil</a></li>
+                    <li id="admin-panel-li" style="display: none;"><a href="#" id="admin-panel-link" data-i18n="navAdmin">Painel Admin</a></li>
+                </ul>
+            </nav>
+            <div class="auth-section">
+                <!-- Seletor de Idioma -->
+                <select id="language-select" class="lang-select" title="Alterar Idioma">
+                    <option value="pt">PT 🇧🇷</option>
+                    <option value="en">EN 🇺🇸</option>
+                    <option value="zh">ZH 🇨🇳</option>
+                </select>
+
+                <!-- Botão de Alternar Tema (Sol / Lua) -->
+                <button id="theme-toggle-btn" class="theme-toggle" title="Alternar Tema">
+                    <i id="theme-icon" class="fas fa-sun"></i>
+                </button>
+                
+                <button id="login-btn" class="btn btn-primary" data-i18n="btnLogin">Entrar</button>
+                <button id="register-btn" class="btn btn-secondary" data-i18n="btnRegister">Cadastrar</button>
+                <div id="user-info" style="display: none;">
+                    <span id="user-name"></span>
+                    <img id="user-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='%2300ff66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='5'%3E%3C/circle%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3C/svg%3E" alt="Avatar">
+                    <button id="logout-btn" class="btn btn-danger" data-i18n="btnLogout">Sair</button>
+                </div>
+            </div>
         </div>
+    </header>
 
-        <div id="status"></div>
+    <!-- Modais de Autenticação -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 data-i18n="modalLoginTitle">Acessar sua Conta</h2>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="E-mail" data-i18n-ph="phEmail" required>
+                <input type="password" id="login-password" placeholder="Senha" data-i18n-ph="phPassword" required>
+                <button type="submit" class="btn btn-primary" data-i18n="btnLogin">Entrar</button>
+                <p id="login-error" class="error-message"></p>
+            </form>
+        </div>
+    </div>
 
-        <div class="sugestao-container">
-            <p>Se aceitar, escolha o melhor dia para o nosso encontro:</p>
-            <div class="input-group">
-                <input type="date" id="data-input">
-                <button class="btn-data" id="btn-data-clique">Confirmar 💖</button>
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 data-i18n="modalRegisterTitle">Criar Nova Conta</h2>
+            <form id="register-form">
+                <input type="text" id="register-name" placeholder="Nome Completo" data-i18n-ph="phFullName" required>
+                <input type="email" id="register-email" placeholder="E-mail" data-i18n-ph="phEmail" required>
+                <input type="password" id="register-password" placeholder="Senha" data-i18n-ph="phPassword" required>
+                <select id="account-type" required>
+                    <option value="" data-i18n="optSelectAccount">Selecione o Tipo de Conta</option>
+                    <option value="buyer" data-i18n="optBuyer">Comprador / Cliente</option>
+                    <option value="seller" data-i18n="optSeller">Vendedor / Prestador de Serviço</option>
+                </select>
+                <button type="submit" class="btn btn-primary" data-i18n="btnRegister">Cadastrar</button>
+                <p id="register-error" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Edição de Anúncio -->
+    <div id="edit-post-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 data-i18n="modalEditPostTitle">Editar Anúncio</h2>
+            <form id="edit-post-form">
+                <input type="hidden" id="edit-post-id">
+                <input type="text" id="edit-post-title" placeholder="Título" data-i18n-ph="phTitle" required>
+                <select id="edit-post-category" required>
+                    <option value="product" data-i18n="optProduct">Produto</option>
+                    <option value="service" data-i18n="optService">Serviço</option>
+                </select>
+                <input type="number" id="edit-post-price" placeholder="Preço" data-i18n-ph="phPrice" min="0" step="0.01">
+                <textarea id="edit-post-description" placeholder="Descrição" data-i18n-ph="phDescription" required></textarea>
+                <input type="tel" id="edit-post-phone" placeholder="Telefone / WhatsApp" data-i18n-ph="phPhone">
+                <button type="submit" class="btn btn-primary" data-i18n="btnSave">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Painel do Administrador -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content admin-modal">
+            <span class="close">&times;</span>
+            <h2 data-i18n="adminTitle">Painel de Controle do Admin</h2>
+            
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3 id="total-users">0</h3>
+                    <p data-i18n="adminTotalUsers">Total de Usuários</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="total-posts">0</h3>
+                    <p data-i18n="adminTotalPosts">Total de Anúncios</p>
+                </div>
+            </div>
+            
+            <div class="admin-section">
+                <h3 data-i18n="adminManagePosts">Gerenciar Anúncios</h3>
+                <div id="posts-list" class="posts-list"></div>
+            </div>
+            
+            <div class="admin-section">
+                <h3 data-i18n="adminManageUsers">Gerenciar Usuários</h3>
+                <div id="users-list" class="users-list"></div>
             </div>
         </div>
     </div>
 
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <!-- Página Inicial -->
+        <section id="home-page" class="page active">
+            <div class="hero">
+                <h1 data-i18n="heroTitle">Bem-vindo ao MarketForum</h1>
+                <p data-i18n="heroSubtitle">Sua plataforma em modo terminal para compra, venda e conexão com prestadores de serviço.</p>
+                <div class="hero-buttons">
+                    <button id="create-post-btn" class="btn btn-primary" data-i18n="heroCreateBtn">Criar Anúncio</button>
+                    <button id="view-feed-btn" class="btn btn-secondary" data-i18n="heroExploreBtn">Explorar Anúncios</button>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-tags fa-3x"></i>
+                    <h3 data-i18n="featMarketTitle">Marketplace</h3>
+                    <p data-i18n="featMarketDesc">Compre e venda produtos com facilidade. Encontre o que precisa ou publique sua oferta.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-comments fa-3x"></i>
+                    <h3 data-i18n="featForumTitle">Fórum da Comunidade</h3>
+                    <p data-i18n="featForumDesc">Conecte-se com outros usuários, tire dúvidas e compartilhe experiências.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users fa-3x"></i>
+                    <h3 data-i18n="featSocialTitle">Rede Social</h3>
+                    <p data-i18n="featSocialDesc">Crie conexões e construa relacionamentos com pessoas da sua comunidade.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página Criar Anúncio -->
+        <section id="create-post-page" class="page">
+            <h2 data-i18n="createListingTitle">Criar Novo Anúncio</h2>
+            <form id="post-form">
+                <input type="text" id="post-title" placeholder="Título" data-i18n-ph="phTitle" required>
+                <select id="post-category" required>
+                    <option value="" data-i18n="optSelectCategory">Selecione a Categoria</option>
+                    <option value="product" data-i18n="optProduct">Produto</option>
+                    <option value="service" data-i18n="optService">Serviço</option>
+                </select>
+                <input type="number" id="post-price" placeholder="Preço (R$)" data-i18n-ph="phPrice" min="0" step="0.01">
+                <textarea id="post-description" placeholder="Descrição detalhada" data-i18n-ph="phDescription" required></textarea>
+                <input type="tel" id="post-phone" placeholder="Telefone / WhatsApp" data-i18n-ph="phPhone">
+                <button type="submit" class="btn btn-primary" data-i18n="btnPublishPost">Publicar Anúncio</button>
+            </form>
+        </section>
+
+        <!-- Página Feed de Anúncios -->
+        <section id="feed-page" class="page">
+            <div class="feed-header">
+                <h2 data-i18n="feedTitle">Últimos Anúncios</h2>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Buscar anúncios..." data-i18n-ph="phSearchListings">
+                    <select id="category-filter">
+                        <option value="" data-i18n="optAllCategories">Todas as Categorias</option>
+                        <option value="product" data-i18n="optProducts">Produtos</option>
+                        <option value="service" data-i18n="optServices">Serviços</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="posts-container" class="posts-container"></div>
+        </section>
+
+        <!-- Página Fórum (Estilo Reddit) -->
+        <section id="forum-page" class="page">
+            <h2 data-i18n="forumTitle">Fórum da Comunidade</h2>
+            <div class="forum-create-box">
+                <h3 data-i18n="forumStartDiscussion">Iniciar uma Nova Discussão</h3>
+                <form id="forum-topic-form">
+                    <input type="text" id="topic-title" placeholder="Título da discussão..." data-i18n-ph="phTopicTitle" required>
+                    <textarea id="topic-content" placeholder="O que você gostaria de discutir?" data-i18n-ph="phTopicContent" required></textarea>
+                    <button type="submit" class="btn btn-primary" data-i18n="btnPostTopic">Publicar Tópico</button>
+                </form>
+            </div>
+
+            <div class="forum-feed">
+                <h3 data-i18n="forumRecentDiscussions">Discussões Recentes</h3>
+                <div id="forum-topics-container"></div>
+            </div>
+        </section>
+
+        <!-- Página de Perfil -->
+        <section id="profile-page" class="page">
+            <div class="profile-header">
+                <img id="profile-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%2300ff66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='5'%3E%3C/circle%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3C/svg%3E" alt="Avatar">
+                <div>
+                    <h2 id="profile-name">Nome do Usuário</h2>
+                    <p id="profile-email">usuario@exemplo.com</p>
+                    <p id="profile-type">Tipo de Conta</p>
+                </div>
+            </div>
+            
+            <div class="posts-section">
+                <h3 data-i18n="profileYourListings">Seus Anúncios</h3>
+                <div id="user-posts-container" class="posts-container"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; Feito por VpC e ArtasDog. Copia nao comedia!</p>
+        </div>
+    </footer>
+
+    <!-- Script Principal -->
     <script>
-        const btnSim = document.getElementById('btn-sim-clique');
-        const btnNao = document.getElementById('btn-nao');
-        const btnData = document.getElementById('btn-data-clique');
-        const areaBotoes = document.getElementById('area-botoes');
-        const dataInput = document.getElementById('data-input');
-        const statusDiv = document.getElementById('status');
-
-        function fugirDoAmigo(evento) {
-            if(evento) evento.preventDefault();
-            const larguraContainer = areaBotoes.offsetWidth - btnNao.offsetWidth;
-            const alturaContainer = areaBotoes.offsetHeight - btnNao.offsetHeight;
-            
-            let novoX = Math.random() * larguraContainer;
-            let novoY = Math.random() * alturaContainer;
-            
-            if (novoX < 140) {
-                novoX = 140 + (Math.random() * (larguraContainer - 140));
-            }
-            
-            if (novoY > 40) {
-                novoY = Math.random() * 40;
-            }
-            
-            btnNao.style.right = 'auto';
-            btnNao.style.left = novoX + 'px';
-            btnNao.style.top = novoY + 'px';
-        }
-
-        btnNao.addEventListener('mouseover', fugirDoAmigo);
-        btnNao.addEventListener('pointerdown', fugirDoAmigo);
-        btnNao.addEventListener('touchstart', fugirDoAmigo);
-
-        btnSim.addEventListener('click', () => {
-            statusDiv.innerHTML = "🎉 Ebaaa! Sabia que diria sim! Escolha a data abaixo e me avise! 🥰✨";
-            statusDiv.style.color = "#155724";
-            statusDiv.style.backgroundColor = "#d4edda";
-            statusDiv.style.border = "1px solid #c3e6cb";
-            resgatarBotaoNao();
+        // app.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const app = new App();
+            app.init();
         });
 
-        btnNao.addEventListener('click', (e) => {
-            e.preventDefault();
-            fugirDoAmigo(e);
-            statusDiv.innerHTML = "⚠️ O botão de não está quebrado! Tente clicar em Sim! 🏃‍♂️💨";
-            statusDiv.style.color = "#856404";
-            statusDiv.style.backgroundColor = "#fff3cd";
-            statusDiv.style.border = "1px solid #ffeeba";
-        });
-
-        btnData.addEventListener('click', () => {
-            const dataValor = dataInput.value;
-            
-            if(dataValor) {
-                const partes = dataValor.split('-');
-                const dataFormatada = `${partes[2]}/${partes[1]}/${partes[0]}`;
-
-                statusDiv.innerHTML = `📅 Encontro marcado para o dia ${dataFormatada}! Tira print e me manda! 🥂💖`;
-                statusDiv.style.color = "#155724";
-                statusDiv.style.backgroundColor = "#d4edda";
-                statusDiv.style.border = "1px solid #c3e6cb";
-            } else {
-                statusDiv.innerHTML = "⚠️ Por favor, selecione uma data no calendário primeiro!";
-                statusDiv.style.color = "#721c24";
-                statusDiv.style.backgroundColor = "#f8d7da";
-                statusDiv.style.border = "1px solid #f5c6cb";
+        // --- DICIONÁRIO DE TRADUÇÃO (PT / EN / ZH) ---
+        const translations = {
+            pt: {
+                navHome: "Início",
+                navCreate: "Criar Anúncio",
+                navFeed: "Anúncios",
+                navForum: "Fórum",
+                navProfile: "Perfil",
+                navAdmin: "Painel Admin",
+                btnLogin: "Entrar",
+                btnRegister: "Cadastrar",
+                btnLogout: "Sair",
+                modalLoginTitle: "Acessar sua Conta",
+                modalRegisterTitle: "Criar Nova Conta",
+                modalEditPostTitle: "Editar Anúncio",
+                phEmail: "E-mail",
+                phPassword: "Senha",
+                phFullName: "Nome Completo",
+                optSelectAccount: "Selecione o Tipo de Conta",
+                optBuyer: "Comprador / Cliente",
+                optSeller: "Vendedor / Prestador de Serviço",
+                optAdmin: "Administrador",
+                heroTitle: "Bem-vindo ao MarketForum",
+                heroSubtitle: "Sua plataforma em modo terminal para compra, venda e conexão com prestadores de serviço.",
+                heroCreateBtn: "Criar Anúncio",
+                heroExploreBtn: "Explorar Anúncios",
+                featMarketTitle: "Marketplace",
+                featMarketDesc: "Compre e venda produtos com facilidade. Encontre o que precisa ou publique sua oferta.",
+                featForumTitle: "Fórum da Comunidade",
+                featForumDesc: "Conecte-se com outros usuários, tire dúvidas e compartilhe experiências.",
+                featSocialTitle: "Rede Social",
+                featSocialDesc: "Crie conexões e construa relacionamentos com pessoas da sua comunidade.",
+                createListingTitle: "Criar Novo Anúncio",
+                phTitle: "Título",
+                optSelectCategory: "Selecione a Categoria",
+                optProduct: "Produto",
+                optService: "Serviço",
+                phPrice: "Preço (R$)",
+                phDescription: "Descrição detalhada",
+                phPhone: "Telefone / WhatsApp",
+                btnPublishPost: "Publicar Anúncio",
+                feedTitle: "Últimos Anúncios",
+                phSearchListings: "Buscar anúncios...",
+                optAllCategories: "Todas as Categorias",
+                optProducts: "Produtos",
+                optServices: "Serviços",
+                forumTitle: "Fórum da Comunidade",
+                forumStartDiscussion: "Iniciar uma Nova Discussão",
+                phTopicTitle: "Título da discussão...",
+                phTopicContent: "O que você gostaria de discutir?",
+                btnPostTopic: "Publicar Tópico",
+                forumRecentDiscussions: "Discussões Recentes",
+                profileYourListings: "Seus Anúncios",
+                adminTitle: "Painel de Controle do Admin",
+                adminTotalUsers: "Total de Usuários",
+                adminTotalPosts: "Total de Anúncios",
+                adminManagePosts: "Gerenciar Anúncios",
+                adminManageUsers: "Gerenciar Usuários",
+                btnDelete: "Excluir",
+                btnEdit: "Editar",
+                btnSave: "Salvar Alterações",
+                msgNoPosts: "Nenhum anúncio encontrado.",
+                msgNoTopics: "Nenhuma discussão encontrada.",
+                msgNoUserPosts: "Você ainda não publicou nenhum anúncio.",
+                lblPostedBy: "Anunciado por:",
+                lblTopicBy: "Postado por",
+                lblComments: "Comentários",
+                phWriteComment: "Escreva um comentário...",
+                btnReply: "Responder",
+                lblPriceOnRequest: "Sob consulta"
+            },
+            en: {
+                navHome: "Home",
+                navCreate: "Create Post",
+                navFeed: "Listings",
+                navForum: "Forum",
+                navProfile: "Profile",
+                navAdmin: "Admin Panel",
+                btnLogin: "Login",
+                btnRegister: "Register",
+                btnLogout: "Logout",
+                modalLoginTitle: "Login to Your Account",
+                modalRegisterTitle: "Create New Account",
+                modalEditPostTitle: "Edit Listing",
+                phEmail: "Email",
+                phPassword: "Password",
+                phFullName: "Full Name",
+                optSelectAccount: "Select Account Type",
+                optBuyer: "Buyer / Client",
+                optSeller: "Seller / Service Provider",
+                optAdmin: "Administrator",
+                heroTitle: "Welcome to MarketForum",
+                heroSubtitle: "Your terminal-mode platform for buying, selling, and connecting with service providers.",
+                heroCreateBtn: "Create a Post",
+                heroExploreBtn: "Explore Listings",
+                featMarketTitle: "Marketplace",
+                featMarketDesc: "Buy and sell products easily. Find what you need or post your offer.",
+                featForumTitle: "Community Forum",
+                featForumDesc: "Connect with other users, ask questions, and share experiences.",
+                featSocialTitle: "Social Network",
+                featSocialDesc: "Build connections and relationships with people in your community.",
+                createListingTitle: "Create New Listing",
+                phTitle: "Title",
+                optSelectCategory: "Select Category",
+                optProduct: "Product",
+                optService: "Service",
+                phPrice: "Price ($)",
+                phDescription: "Detailed description",
+                phPhone: "Phone / WhatsApp",
+                btnPublishPost: "Publish Listing",
+                feedTitle: "Latest Listings",
+                phSearchListings: "Search listings...",
+                optAllCategories: "All Categories",
+                optProducts: "Products",
+                optServices: "Services",
+                forumTitle: "Community Forum",
+                forumStartDiscussion: "Start a New Discussion",
+                phTopicTitle: "Discussion title...",
+                phTopicContent: "What would you like to discuss?",
+                btnPostTopic: "Post Topic",
+                forumRecentDiscussions: "Recent Discussions",
+                profileYourListings: "Your Listings",
+                adminTitle: "Admin Dashboard",
+                adminTotalUsers: "Total Users",
+                adminTotalPosts: "Total Listings",
+                adminManagePosts: "Manage Listings",
+                adminManageUsers: "Manage Users",
+                btnDelete: "Delete",
+                btnEdit: "Edit",
+                btnSave: "Save Changes",
+                msgNoPosts: "No listings found.",
+                msgNoTopics: "No discussions found.",
+                msgNoUserPosts: "You haven't published any listings yet.",
+                lblPostedBy: "Posted by:",
+                lblTopicBy: "Topic by",
+                lblComments: "Comments",
+                phWriteComment: "Write a comment...",
+                btnReply: "Reply",
+                lblPriceOnRequest: "Price on request"
+            },
+            zh: {
+                navHome: "首页",
+                navCreate: "发布信息",
+                navFeed: "公告栏",
+                navForum: "社区论坛",
+                navProfile: "个人资料",
+                navAdmin: "管理面板",
+                btnLogin: "登录",
+                btnRegister: "注册",
+                btnLogout: "退出登录",
+                modalLoginTitle: "登录您的账户",
+                modalRegisterTitle: "创建新账户",
+                modalEditPostTitle: "编辑信息",
+                phEmail: "电子邮件",
+                phPassword: "密码",
+                phFullName: "全名",
+                optSelectAccount: "选择账户类型",
+                optBuyer: "买家 / 客户",
+                optSeller: "卖家 / 服务 providers",
+                optAdmin: "管理员",
+                heroTitle: "欢迎来到 MarketForum",
+                heroSubtitle: "您的终端模式买卖与服务连接平台。",
+                heroCreateBtn: "发布信息",
+                heroExploreBtn: "浏览信息",
+                featMarketTitle: "集市",
+                featMarketDesc: "轻松买卖商品。寻找所需或发布您的服务。",
+                featForumTitle: "社区论坛",
+                featForumDesc: "与其他用户交流，解答疑问并分享经验。",
+                featSocialTitle: "社交网络",
+                featSocialDesc: "与社区成员建立联系与关系。",
+                createListingTitle: "创建新信息",
+                phTitle: "标题",
+                optSelectCategory: "选择类别",
+                optProduct: "产品",
+                optService: "服务",
+                phPrice: "价格 (¥)",
+                phDescription: "详细描述",
+                phPhone: "电话 / WhatsApp",
+                btnPublishPost: "发布信息",
+                feedTitle: "最新信息",
+                phSearchListings: "搜索信息...",
+                optAllCategories: "所有类别",
+                optProducts: "产品",
+                optServices: "服务",
+                forumTitle: "社区论坛",
+                forumStartDiscussion: "发起新讨论",
+                phTopicTitle: "讨论标题...",
+                phTopicContent: "您想讨论什么？",
+                btnPostTopic: "发布话题",
+                forumRecentDiscussions: "最新讨论",
+                profileYourListings: "您的发布",
+                adminTitle: "管理员控制台",
+                adminTotalUsers: "总用户数",
+                adminTotalPosts: "总发布数",
+                adminManagePosts: "管理发布",
+                adminManageUsers: "管理用户",
+                btnDelete: "删除",
+                btnEdit: "编辑",
+                btnSave: "保存更改",
+                msgNoPosts: "未找到信息。",
+                msgNoTopics: "未找到讨论。",
+                msgNoUserPosts: "您尚未发布任何信息。",
+                lblPostedBy: "发布者：",
+                lblTopicBy: "话题发起人",
+                lblComments: "评论",
+                phWriteComment: "写下评论...",
+                btnReply: "回复",
+                lblPriceOnRequest: "价格面议"
             }
-        });
+        };
 
-        function resgatarBotaoNao() {
-            btnNao.style.left = 'auto';
-            btnNao.style.top = '20px';
-            btnNao.style.right = '20px';
+        class App {
+            constructor() {
+                this.currentUser = null;
+                this.users = [];
+                this.posts = [];
+                this.topics = [];
+                this.currentPage = 'home';
+                this.currentTheme = 'dark';
+                this.currentLang = 'pt';
+            }
+
+            init() {
+                this.loadLang();
+                this.loadTheme();
+                this.loadUsers();
+                this.loadPosts();
+                this.loadTopics();
+                this.checkAuthStatus();
+                this.setupEventListeners();
+                this.showPage('home');
+            }
+
+            // --- IDIOMA ---
+            loadLang() {
+                const savedLang = localStorage.getItem('mf_lang') || 'pt';
+                this.setLang(savedLang);
+            }
+
+            setLang(lang) {
+                this.currentLang = lang;
+                localStorage.setItem('mf_lang', lang);
+
+                const select = document.getElementById('language-select');
+                if (select) select.value = lang;
+
+                this.applyTranslations();
+            }
+
+            applyTranslations() {
+                const t = translations[this.currentLang];
+
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (t[key]) el.textContent = t[key];
+                });
+
+                document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-ph');
+                    if (t[key]) el.placeholder = t[key];
+                });
+
+                if (this.currentPage === 'feed') this.renderPosts();
+                if (this.currentPage === 'forum') this.renderTopics();
+                if (this.currentPage === 'profile') this.renderProfile();
+            }
+
+            t(key) {
+                return translations[this.currentLang][key] || key;
+            }
+
+            // --- TEMA ---
+            loadTheme() {
+                const savedTheme = localStorage.getItem('mf_theme') || 'dark';
+                this.setTheme(savedTheme);
+            }
+
+            setTheme(theme) {
+                this.currentTheme = theme;
+                document.body.className = `${theme}-theme`;
+                localStorage.setItem('mf_theme', theme);
+
+                const themeIcon = document.getElementById('theme-icon');
+                if (themeIcon) {
+                    themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            }
+
+            toggleTheme() {
+                this.setTheme(this.currentTheme === 'dark' ? 'light' : 'dark');
+            }
+
+            // --- CARREGAMENTO DE DADOS ---
+            loadUsers() {
+                const storedUsers = localStorage.getItem('mf_users');
+                if (storedUsers) {
+                    this.users = JSON.parse(storedUsers);
+                    if (!this.users.some(u => u.type === 'admin')) {
+                        this.users.push({ id: 999, name: 'Admin User', email: 'admin@example.com', password: 'admin', type: 'admin' });
+                        this.saveUsers();
+                    }
+                } else {
+                    this.users = [
+                        { id: 1, name: 'John Doe', email: 'john@example.com', password: '123', type: 'buyer' },
+                        { id: 999, name: 'Admin User', email: 'admin@example.com', password: 'admin', type: 'admin' }
+                    ];
+                    this.saveUsers();
+                }
+            }
+
+            saveUsers() {
+                localStorage.setItem('mf_users', JSON.stringify(this.users));
+            }
+
+            loadPosts() {
+                const storedPosts = localStorage.getItem('posts');
+                if (storedPosts) {
+                    this.posts = JSON.parse(storedPosts);
+                } else {
+                    this.posts = [
+                        {
+                            id: 1,
+                            title: 'Câmera Vintage Antiga',
+                            category: 'product',
+                            price: 85.00,
+                            description: 'Linda câmera vintage em excelente estado de conservação.',
+                            phone: '+5511999999999',
+                            author: 'John Doe',
+                            authorId: 1,
+                            date: new Date().toISOString()
+                        }
+                    ];
+                    this.savePosts();
+                }
+            }
+
+            savePosts() {
+                localStorage.setItem('posts', JSON.stringify(this.posts));
+            }
+
+            loadTopics() {
+                const storedTopics = localStorage.getItem('mf_topics');
+                if (storedTopics) {
+                    this.topics = JSON.parse(storedTopics);
+                } else {
+                    this.topics = [
+                        {
+                            id: 1,
+                            title: 'Bem-vindo ao fórum de comunidade estilo terminal!',
+                            content: 'Sinta-se à vontade para fazer perguntas, compartilhar dicas e conectar-se.',
+                            author: 'Admin User',
+                            authorId: 999,
+                            date: new Date().toISOString(),
+                            replies: [
+                                { id: 101, author: 'John Doe', text: 'Obrigado! Excelente plataforma.', date: new Date().toISOString() }
+                            ]
+                        }
+                    ];
+                    this.saveTopics();
+                }
+            }
+
+            saveTopics() {
+                localStorage.setItem('mf_topics', JSON.stringify(this.topics));
+            }
+
+            checkAuthStatus() {
+                const sessionUser = localStorage.getItem('mf_session');
+                if (sessionUser) {
+                    this.currentUser = JSON.parse(sessionUser);
+                }
+                this.updateUI();
+            }
+
+            // --- EVENTOS ---
+            setupEventListeners() {
+                const langSelect = document.getElementById('language-select');
+                if (langSelect) langSelect.addEventListener('change', (e) => this.setLang(e.target.value));
+
+                const themeToggleBtn = document.getElementById('theme-toggle-btn');
+                if (themeToggleBtn) themeToggleBtn.addEventListener('click', () => this.toggleTheme());
+
+                document.getElementById('home-link').addEventListener('click', (e) => { e.preventDefault(); this.showPage('home'); });
+                document.getElementById('create-post-link').addEventListener('click', (e) => { e.preventDefault(); this.showPage('create-post'); });
+                document.getElementById('feed-link').addEventListener('click', (e) => { e.preventDefault(); this.showPage('feed'); });
+                document.getElementById('forum-link').addEventListener('click', (e) => { e.preventDefault(); this.showPage('forum'); });
+                document.getElementById('profile-link').addEventListener('click', (e) => { e.preventDefault(); this.showPage('profile'); });
+
+                const adminPanelLink = document.getElementById('admin-panel-link');
+                if (adminPanelLink) adminPanelLink.addEventListener('click', (e) => { e.preventDefault(); this.openAdminPanel(); });
+
+                document.getElementById('create-post-btn').addEventListener('click', () => this.showPage('create-post'));
+                document.getElementById('view-feed-btn').addEventListener('click', () => this.showPage('feed'));
+
+                document.getElementById('login-btn').addEventListener('click', () => this.openModal('login-modal'));
+                document.getElementById('register-btn').addEventListener('click', () => this.openModal('register-modal'));
+                document.getElementById('logout-btn').addEventListener('click', () => this.logout());
+
+                document.querySelectorAll('.close').forEach(closeBtn => {
+                    closeBtn.addEventListener('click', () => {
+                        const modal = closeBtn.closest('.modal');
+                        if (modal) modal.style.display = 'none';
+                    });
+                });
+
+                window.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('modal')) e.target.style.display = 'none';
+                });
+
+                document.getElementById('login-form').addEventListener('submit', (e) => { e.preventDefault(); this.handleLogin(); });
+                document.getElementById('register-form').addEventListener('submit', (e) => { e.preventDefault(); this.handleRegister(); });
+                document.getElementById('post-form').addEventListener('submit', (e) => { e.preventDefault(); this.createPost(); });
+                document.getElementById('edit-post-form').addEventListener('submit', (e) => { e.preventDefault(); this.handleEditPost(); });
+                document.getElementById('forum-topic-form').addEventListener('submit', (e) => { e.preventDefault(); this.createTopic(); });
+
+                document.getElementById('search-input').addEventListener('input', () => this.filterPosts());
+                document.getElementById('category-filter').addEventListener('change', () => this.filterPosts());
+            }
+
+            // --- MODAIS ---
+            openModal(modalId) {
+                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+                const modal = document.getElementById(modalId);
+                if (modal) modal.style.display = 'block';
+            }
+
+            closeModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) modal.style.display = 'none';
+            }
+
+            // --- AUTENTICAÇÃO ---
+            handleRegister() {
+                const name = document.getElementById('register-name').value;
+                const email = document.getElementById('register-email').value.toLowerCase().trim();
+                const password = document.getElementById('register-password').value;
+                const accountType = document.getElementById('account-type').value;
+
+                if (this.users.some(u => u.email === email)) {
+                    document.getElementById('register-error').textContent = 'E-mail já cadastrado!';
+                    return;
+                }
+
+                const newUser = { id: Date.now(), name, email, password, type: accountType };
+
+                this.users.push(newUser);
+                this.saveUsers();
+
+                this.currentUser = newUser;
+                localStorage.setItem('mf_session', JSON.stringify(newUser));
+
+                document.getElementById('register-form').reset();
+                this.closeModal('register-modal');
+                this.updateUI();
+                this.showPage('feed');
+            }
+
+            handleLogin() {
+                const email = document.getElementById('login-email').value.toLowerCase().trim();
+                const password = document.getElementById('login-password').value;
+
+                const user = this.users.find(u => u.email === email && u.password === password);
+
+                if (!user) {
+                    document.getElementById('login-error').textContent = 'E-mail ou senha incorretos!';
+                    return;
+                }
+
+                this.currentUser = user;
+                localStorage.setItem('mf_session', JSON.stringify(user));
+
+                document.getElementById('login-form').reset();
+                this.closeModal('login-modal');
+                this.updateUI();
+                this.showPage('feed');
+            }
+
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('mf_session');
+                this.updateUI();
+                this.showPage('home');
+            }
+
+            updateUI() {
+                const loginBtn = document.getElementById('login-btn');
+                const registerBtn = document.getElementById('register-btn');
+                const userInfo = document.getElementById('user-info');
+                const userName = document.getElementById('user-name');
+                const adminLi = document.getElementById('admin-panel-li');
+
+                if (this.currentUser) {
+                    if (loginBtn) loginBtn.style.display = 'none';
+                    if (registerBtn) registerBtn.style.display = 'none';
+                    if (userInfo) userInfo.style.display = 'flex';
+                    if (userName) userName.textContent = this.currentUser.name;
+                    if (adminLi) adminLi.style.display = (this.currentUser.type === 'admin') ? 'inline-block' : 'none';
+                } else {
+                    if (loginBtn) loginBtn.style.display = 'inline-block';
+                    if (registerBtn) registerBtn.style.display = 'inline-block';
+                    if (userInfo) userInfo.style.display = 'none';
+                    if (adminLi) adminLi.style.display = 'none';
+                }
+            }
+
+            showPage(page) {
+                if (page === 'create-post' && !this.currentUser) {
+                    alert('Você precisa estar logado!');
+                    this.openModal('login-modal');
+                    return;
+                }
+
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                const pageElement = document.getElementById(`${page}-page`);
+                if (pageElement) pageElement.classList.add('active');
+
+                document.querySelectorAll('#main-nav a').forEach(link => link.classList.remove('active'));
+                const activeLink = document.getElementById(`${page}-link`);
+                if (activeLink) activeLink.classList.add('active');
+
+                this.currentPage = page;
+
+                if (page === 'feed') this.renderPosts();
+                if (page === 'forum') this.renderTopics();
+                if (page === 'profile') this.renderProfile();
+            }
+
+            // --- ANÚNCIOS (GERENCIAMENTO PELO PROPRIETÁRIO) ---
+            createPost() {
+                if (!this.currentUser) return;
+
+                const title = document.getElementById('post-title').value;
+                const category = document.getElementById('post-category').value;
+                const price = document.getElementById('post-price').value;
+                const description = document.getElementById('post-description').value;
+                const phone = document.getElementById('post-phone').value;
+
+                const post = {
+                    id: Date.now(),
+                    title,
+                    category,
+                    price: price ? parseFloat(price) : null,
+                    description,
+                    phone,
+                    author: this.currentUser.name,
+                    authorId: this.currentUser.id,
+                    date: new Date().toISOString()
+                };
+
+                this.posts.unshift(post);
+                this.savePosts();
+                document.getElementById('post-form').reset();
+                this.showPage('feed');
+            }
+
+            openEditModal(post) {
+                document.getElementById('edit-post-id').value = post.id;
+                document.getElementById('edit-post-title').value = post.title;
+                document.getElementById('edit-post-category').value = post.category;
+                document.getElementById('edit-post-price').value = post.price || '';
+                document.getElementById('edit-post-description').value = post.description;
+                document.getElementById('edit-post-phone').value = post.phone || '';
+
+                this.openModal('edit-post-modal');
+            }
+
+            handleEditPost() {
+                const id = parseInt(document.getElementById('edit-post-id').value);
+                const post = this.posts.find(p => p.id === id);
+
+                if (post && this.currentUser && post.authorId === this.currentUser.id) {
+                    post.title = document.getElementById('edit-post-title').value;
+                    post.category = document.getElementById('edit-post-category').value;
+                    const priceVal = document.getElementById('edit-post-price').value;
+                    post.price = priceVal ? parseFloat(priceVal) : null;
+                    post.description = document.getElementById('edit-post-description').value;
+                    post.phone = document.getElementById('edit-post-phone').value;
+
+                    this.savePosts();
+                    this.closeModal('edit-post-modal');
+
+                    if (this.currentPage === 'feed') this.renderPosts();
+                    if (this.currentPage === 'profile') this.renderProfile();
+                }
+            }
+
+            deleteOwnPost(id) {
+                const post = this.posts.find(p => p.id === id);
+                if (post && this.currentUser && post.authorId === this.currentUser.id) {
+                    if (confirm('Tem certeza que deseja excluir seu anúncio?')) {
+                        this.posts = this.posts.filter(p => p.id !== id);
+                        this.savePosts();
+                        if (this.currentPage === 'feed') this.renderPosts();
+                        if (this.currentPage === 'profile') this.renderProfile();
+                    }
+                }
+            }
+
+            renderPosts() {
+                const container = document.getElementById('posts-container');
+                if (!container) return;
+
+                let filteredPosts = this.posts;
+                const searchTerm = document.getElementById('search-input').value.toLowerCase();
+                const categoryFilter = document.getElementById('category-filter').value;
+
+                if (searchTerm) {
+                    filteredPosts = filteredPosts.filter(post => 
+                        post.title.toLowerCase().includes(searchTerm) ||
+                        post.description.toLowerCase().includes(searchTerm)
+                    );
+                }
+
+                if (categoryFilter) {
+                    filteredPosts = filteredPosts.filter(post => post.category === categoryFilter);
+                }
+
+                container.innerHTML = '';
+
+                if (filteredPosts.length === 0) {
+                    container.innerHTML = `<p>${this.t('msgNoPosts')}</p>`;
+                    return;
+                }
+
+                filteredPosts.forEach(post => {
+                    container.appendChild(this.createPostElement(post));
+                });
+            }
+
+            createPostElement(post) {
+                const postCard = document.createElement('div');
+                postCard.className = 'post-card';
+
+                const priceHtml = post.price 
+                    ? `<span class="post-price">R$ ${post.price.toFixed(2)}</span>` 
+                    : `<span class="post-price" style="color:var(--text-muted); font-size:0.9rem;">${this.t('lblPriceOnRequest')}</span>`;
+                
+                const categoryClass = post.category === 'product' ? 'product' : 'service';
+                const categoryText = post.category === 'product' ? this.t('optProduct') : this.t('optService');
+
+                // Botões de Ação do Dono
+                let ownerActionsHtml = '';
+                if (this.currentUser && this.currentUser.id === post.authorId) {
+                    ownerActionsHtml = `
+                        <div class="owner-actions">
+                            <button class="btn btn-secondary btn-edit-post" data-id="${post.id}">${this.t('btnEdit')}</button>
+                            <button class="btn btn-danger btn-delete-post" data-id="${post.id}">${this.t('btnDelete')}</button>
+                        </div>
+                    `;
+                }
+
+                postCard.innerHTML = `
+                    <div class="post-content">
+                        <h3 class="post-title">${post.title}</h3>
+                        <div class="post-meta">
+                            <span class="post-category ${categoryClass}">${categoryText}</span>
+                            <span>${this.formatDate(post.date)}</span>
+                        </div>
+                        <p class="post-description">${post.description}</p>
+                        ${priceHtml}
+                        <div style="margin-top:10px; font-size:0.85rem; color:var(--text-muted);">${this.t('lblPostedBy')} <strong>${post.author}</strong></div>
+                        ${post.phone ? `<a href="tel:${post.phone}" class="post-phone" style="margin-top:8px;">📞 ${post.phone}</a>` : ''}
+                        ${ownerActionsHtml}
+                    </div>
+                `;
+
+                // Ativa os escutadores dos botões de dono
+                const editBtn = postCard.querySelector('.btn-edit-post');
+                if (editBtn) editBtn.addEventListener('click', () => this.openEditModal(post));
+
+                const deleteBtn = postCard.querySelector('.btn-delete-post');
+                if (deleteBtn) deleteBtn.addEventListener('click', () => this.deleteOwnPost(post.id));
+
+                return postCard;
+            }
+
+            formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString(this.currentLang === 'pt' ? 'pt-BR' : (this.currentLang === 'zh' ? 'zh-CN' : 'en-US'));
+            }
+
+            filterPosts() {
+                this.renderPosts();
+            }
+
+            // --- FÓRUM (ESTILO REDDIT COM EXCLUSÃO PELO DONO) ---
+            createTopic() {
+                if (!this.currentUser) {
+                    this.openModal('login-modal');
+                    return;
+                }
+
+                const title = document.getElementById('topic-title').value;
+                const content = document.getElementById('topic-content').value;
+
+                if (!title || !content) return;
+
+                const topic = {
+                    id: Date.now(),
+                    title,
+                    content,
+                    author: this.currentUser.name,
+                    authorId: this.currentUser.id,
+                    date: new Date().toISOString(),
+                    replies: []
+                };
+
+                this.topics.unshift(topic);
+                this.saveTopics();
+                document.getElementById('forum-topic-form').reset();
+                this.renderTopics();
+            }
+
+            deleteOwnTopic(id) {
+                const topic = this.topics.find(t => t.id === id);
+                if (topic && this.currentUser && topic.authorId === this.currentUser.id) {
+                    if (confirm('Tem certeza que deseja excluir esta discussão?')) {
+                        this.topics = this.topics.filter(t => t.id !== id);
+                        this.saveTopics();
+                        this.renderTopics();
+                    }
+                }
+            }
+
+            addReply(topicId, text) {
+                if (!this.currentUser) {
+                    this.openModal('login-modal');
+                    return;
+                }
+
+                const topic = this.topics.find(t => t.id === topicId);
+                if (topic) {
+                    topic.replies.push({
+                        id: Date.now(),
+                        author: this.currentUser.name,
+                        text,
+                        date: new Date().toISOString()
+                    });
+
+                    this.saveTopics();
+                    this.renderTopics();
+                }
+            }
+
+            renderTopics() {
+                const container = document.getElementById('forum-topics-container');
+                if (!container) return;
+
+                container.innerHTML = '';
+
+                if (this.topics.length === 0) {
+                    container.innerHTML = `<p>${this.t('msgNoTopics')}</p>`;
+                    return;
+                }
+
+                this.topics.forEach(topic => {
+                    const topicCard = document.createElement('div');
+                    topicCard.className = 'forum-topic-card';
+
+                    const repliesHtml = topic.replies.map(r => `
+                        <div class="reply-item">
+                            <div class="reply-header">
+                                <strong>${r.author}</strong> • ${this.formatDate(r.date)}
+                            </div>
+                            <div class="reply-text">${r.text}</div>
+                        </div>
+                    `).join('');
+
+                    let ownerTopicActionsHtml = '';
+                    if (this.currentUser && this.currentUser.id === topic.authorId) {
+                        ownerTopicActionsHtml = `
+                            <div class="owner-actions">
+                                <button class="btn btn-danger btn-delete-topic" data-id="${topic.id}">${this.t('btnDelete')}</button>
+                            </div>
+                        `;
+                    }
+
+                    topicCard.innerHTML = `
+                        <div class="topic-header">
+                            <span>${this.t('lblTopicBy')} <strong>${topic.author}</strong></span>
+                            <span>${this.formatDate(topic.date)}</span>
+                        </div>
+                        <h3 class="topic-title">${topic.title}</h3>
+                        <p class="topic-content">${topic.content}</p>
+                        <div class="topic-actions">
+                            💬 ${topic.replies.length} ${this.t('lblComments')}
+                        </div>
+                        ${ownerTopicActionsHtml}
+                        <div class="replies-container">
+                            ${repliesHtml}
+                            <form class="reply-form">
+                                <input type="text" placeholder="${this.t('phWriteComment')}" required>
+                                <button type="submit" class="btn btn-primary">${this.t('btnReply')}</button>
+                            </form>
+                        </div>
+                    `;
+
+                    const replyForm = topicCard.querySelector('.reply-form');
+                    replyForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        const input = replyForm.querySelector('input');
+                        this.addReply(topic.id, input.value);
+                    });
+
+                    const deleteTopicBtn = topicCard.querySelector('.btn-delete-topic');
+                    if (deleteTopicBtn) deleteTopicBtn.addEventListener('click', () => this.deleteOwnTopic(topic.id));
+
+                    container.appendChild(topicCard);
+                });
+            }
+
+            // --- PERFIL ---
+            renderProfile() {
+                if (!this.currentUser) {
+                    this.showPage('home');
+                    this.openModal('login-modal');
+                    return;
+                }
+
+                document.getElementById('profile-name').textContent = this.currentUser.name;
+                document.getElementById('profile-email').textContent = this.currentUser.email;
+
+                let userTypeLabel = this.t('optBuyer');
+                if (this.currentUser.type === 'seller') userTypeLabel = this.t('optSeller');
+                if (this.currentUser.type === 'admin') userTypeLabel = this.t('optAdmin');
+
+                document.getElementById('profile-type').textContent = userTypeLabel;
+
+                const container = document.getElementById('user-posts-container');
+                if (!container) return;
+
+                const userPosts = this.posts.filter(p => p.authorId === this.currentUser.id);
+                container.innerHTML = '';
+
+                if (userPosts.length === 0) {
+                    container.innerHTML = `<p>${this.t('msgNoUserPosts')}</p>`;
+                    return;
+                }
+
+                userPosts.forEach(post => {
+                    container.appendChild(this.createPostElement(post));
+                });
+            }
+
+            // --- PAINEL ADMIN ---
+            openAdminPanel() {
+                if (!this.currentUser || this.currentUser.type !== 'admin') return;
+                this.renderAdminData();
+                this.openModal('admin-modal');
+            }
+
+            renderAdminData() {
+                document.getElementById('total-users').textContent = this.users.length;
+                document.getElementById('total-posts').textContent = this.posts.length;
+
+                const postsList = document.getElementById('posts-list');
+                postsList.innerHTML = '';
+                this.posts.forEach(post => {
+                    const item = document.createElement('div');
+                    item.className = 'post-card';
+                    item.style.padding = '10px 15px';
+                    item.innerHTML = `
+                        <div class="post-info">
+                            <strong>${post.title}</strong> — <em>${post.author}</em>
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn btn-danger btn-delete-post" data-id="${post.id}">${this.t('btnDelete')}</button>
+                        </div>
+                    `;
+                    postsList.appendChild(item);
+                });
+
+                const usersList = document.getElementById('users-list');
+                usersList.innerHTML = '';
+                this.users.forEach(user => {
+                    const item = document.createElement('div');
+                    item.className = 'user-card';
+                    item.innerHTML = `
+                        <div class="user-info">
+                            <strong>${user.name}</strong> (${user.email}) — <span>${user.type}</span>
+                        </div>
+                        <div class="user-actions">
+                            ${user.id !== this.currentUser.id ? `<button class="btn btn-danger btn-delete-user" data-id="${user.id}">${this.t('btnDelete')}</button>` : '<span>(Você)</span>'}
+                        </div>
+                    `;
+                    usersList.appendChild(item);
+                });
+
+                document.querySelectorAll('.btn-delete-post').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = parseInt(e.target.getAttribute('data-id'));
+                        this.deletePost(id);
+                    });
+                });
+
+                document.querySelectorAll('.btn-delete-user').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = parseInt(e.target.getAttribute('data-id'));
+                        this.deleteUser(id);
+                    });
+                });
+            }
+
+            deletePost(id) {
+                if (confirm('Confirm?')) {
+                    this.posts = this.posts.filter(p => p.id !== id);
+                    this.savePosts();
+                    this.renderAdminData();
+                    if (this.currentPage === 'feed') this.renderPosts();
+                }
+            }
+
+            deleteUser(id) {
+                if (confirm('Confirm?')) {
+                    this.users = this.users.filter(u => u.id !== id);
+                    this.saveUsers();
+                    this.renderAdminData();
+                }
+            }
         }
     </script>
 </body>
