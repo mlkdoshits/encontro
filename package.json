@@ -1,7 +1,7 @@
 {
-  "name": "convite-encontro",
+  "name": "marketforum",
   "version": "1.0.0",
-  "description": "Site de convite romântico",
+  "description": "MarketPlace Forum Network",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -9,3 +9,4 @@
   "dependencies": {
     "express": "^4.19.2"
   }
+}
