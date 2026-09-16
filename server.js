@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Servir arquivos estáticos (como o index.html e imagens)
+// Servir arquivos estáticos (index.html, css, etc)
 app.use(express.static(path.join(__dirname)));
 
 app.listen(PORT, () => {
