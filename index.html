@@ -64,13 +64,6 @@
             line-height: 1.3;
         }
 
-        p {
-            font-size: 14px;
-            color: #ddd;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-
         .btn-group {
             display: flex;
             gap: 12px;
@@ -180,7 +173,7 @@
 <body>
 
     <div class="card" id="app-card">
-        <!-- TELA 1: Bora marcar um date? (Agora é a primeira tela) -->
+        <!-- Tela 1 -->
         <div id="screen-1" class="screen">
             <div class="image-container">
                 <img src="img/rosas.png" alt="Bora marcar um date">
@@ -192,7 +185,7 @@
             </div>
         </div>
 
-        <!-- TELA 2 -->
+        <!-- Tela 2 -->
         <div id="screen-2" class="screen hidden">
             <div class="image-container">
                 <img src="img/vitoria.png" alt="Ta bom entao gostosa">
@@ -200,7 +193,7 @@
             <button class="btn" onclick="nextScreen(3)" style="width: 100%;">Próximo 💙</button>
         </div>
 
-        <!-- TELA 3 -->
+        <!-- Tela 3 -->
         <div id="screen-3" class="screen hidden">
             <div class="image-container">
                 <img src="img/cafe.png" alt="Café e curvas">
@@ -210,7 +203,7 @@
             <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
         </div>
 
-        <!-- TELA 4: Opções de comida -->
+        <!-- Tela 4 -->
         <div id="screen-4" class="screen hidden">
             <div class="options-grid" id="food-grid" style="margin-top: 5px;">
                 <div class="option-card" onclick="selectOption('food', 'Hambúrguer', this)"><span>🍔</span>Hambúrguer</div>
@@ -223,7 +216,7 @@
             <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 5px;">Escolher prato 🍽️</button>
         </div>
 
-        <!-- TELA 5: Resumo e Memes Aleatórios -->
+        <!-- Tela 5 -->
         <div id="screen-5" class="screen hidden">
             <div class="image-container" id="final-img-container">
                 <img id="final-meme-img" src="img/meme1.png" alt="Meme final">
