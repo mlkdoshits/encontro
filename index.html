@@ -212,6 +212,12 @@
         </div>
 
         <div id="screen-5" class="screen hidden">
+            <h2>Onde vai ser o encontro?</h2>
+            <input type="text" id="local-date" class="input-box" placeholder="Digite o local do encontro">
+            <button class="btn" onclick="validateLocal()" style="width: 100%;">Confirmar local 📍</button>
+        </div>
+
+        <div id="screen-6" class="screen hidden">
             <div class="image-container" id="final-img-container">
                 <img id="final-meme-img" src="img/meme1.png" alt="Meme final">
             </div>
@@ -219,6 +225,7 @@
                 <div>📅 <span id="res-data"></span></div>
                 <div>⏰ <span id="res-hora"></span></div>
                 <div>🍽️ <span id="res-food">Pizza</span></div>
+                <div>📍 <span id="res-local"></span></div>
             </div>
             <button class="btn" onclick="enviarWhatsApp()" style="background: linear-gradient(135deg, #25d366, #128c7e); width: 100%;">Mandar Resposta no WhatsApp 📱</button>
         </div>
@@ -240,7 +247,8 @@
         let selectedData = {
             date: '',
             time: '',
-            food: ''
+            food: '',
+            local: ''
         };
 
         function nextScreen(screenNumber) {
@@ -249,7 +257,7 @@
             const targetId = `screen-${screenNumber}`;
             document.getElementById(targetId).classList.remove('hidden');
 
-            if (screenNumber === 5) {
+            if (screenNumber === 6) {
                 const rawDate = document.getElementById('data-date').value;
                 if (rawDate) {
                     const parts = rawDate.split('-');
@@ -260,6 +268,7 @@
                 document.getElementById('res-data').innerText = selectedData.date;
                 document.getElementById('res-hora').innerText = selectedData.time;
                 document.getElementById('res-food').innerText = selectedData.food || 'Não selecionado';
+                document.getElementById('res-local').innerText = selectedData.local || 'Não informado';
 
                 const memesFinais = [
                     "img/meme1.png",
@@ -308,8 +317,18 @@
             nextScreen(5);
         }
 
+        function validateLocal() {
+            const local = document.getElementById('local-date').value.trim();
+            if (!local) {
+                alert('Digite o local do encontro!');
+                return;
+            }
+            selectedData.local = local;
+            nextScreen(6);
+        }
+
         function enviarWhatsApp() {
-            const texto = `Opa! Aceito o convite para o date! 🎉\n📅 Data: ${selectedData.date}\n⏰ Horário: ${selectedData.time}\n🍽️ Prato: ${selectedData.food}`;
+            const texto = `Opa! Aceito o convite para o date! 🎉\n📅 Data: ${selectedData.date}\n⏰ Horário: ${selectedData.time}\n🍽️ Prato: ${selectedData.food}\n📍 Local: ${selectedData.local}`;
             const url = `https://api.whatsapp.com/send?phone=555193308915&text=${encodeURIComponent(texto)}`;
             window.open(url, '_blank');
         }
