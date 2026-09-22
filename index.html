@@ -98,11 +98,11 @@
             box-shadow: none !important;
             flex: 1;
             position: relative;
-            transition: none !important;
+            /* Uma transição muito rápida de 0.1s garante que o rato perca o botão com suavidade */
+            transition: transform 0.1s ease-out !important; 
         }
 
         .btn-nao:hover {
-            transform: none !important;
             box-shadow: none !important;
         }
 
@@ -181,7 +181,8 @@
             <h2>Bora marcar um date?</h2>
             <div class="btn-group" id="btn-group-container">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
-                <button class="btn btn-nao" id="btn-nao" onmousemove="teletransportar(event)" ontouchstart="teletransportar(event)">Não</button>
+                <!-- Adicionado onmouseenter e onclick para garantir a fuga -->
+                <button class="btn btn-nao" id="btn-nao" onmouseenter="teletransportar(event)" onclick="teletransportar(event)" ontouchstart="teletransportar(event)">Não</button>
             </div>
         </div>
 
@@ -278,9 +279,6 @@
             }
         }
 
-        let currentX = 0;
-        let currentY = 0;
-
         function teletransportar(e) {
             if (e.type === 'touchstart') {
                 e.preventDefault();
@@ -289,16 +287,18 @@
             const btnNao = document.getElementById('btn-nao');
             const isMobile = window.innerWidth <= 768 || e.type === 'touchstart';
 
-            const limitX = isMobile ? 90 : 160;
-            const limitY = isMobile ? 80 : 130;
+            const limitX = isMobile ? 100 : 180;
+            const limitY = isMobile ? 90 : 140;
 
-            const randomX = (Math.random() * 2 - 1) * limitX;
-            const randomY = (Math.random() * 2 - 1) * limitY;
+            let randomX, randomY;
 
-            currentX = randomX;
-            currentY = randomY;
+            // Obriga a que o botão salte pelo menos 60px para longe, evitando que fique "preso" no lugar
+            do {
+                randomX = (Math.random() * 2 - 1) * limitX;
+                randomY = (Math.random() * 2 - 1) * limitY;
+            } while (Math.abs(randomX) < 60 && Math.abs(randomY) < 60);
 
-            btnNao.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            btnNao.style.transform = `translate(${randomX}px, ${randomY}px)`;
         }
 
         function selectOption(category, value, element) {
