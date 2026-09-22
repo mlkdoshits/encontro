@@ -20,6 +20,7 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
         .card {
@@ -35,6 +36,7 @@
             flex-direction: column;
             align-items: center;
             position: relative;
+            z-index: 10;
         }
 
         .image-container {
@@ -68,6 +70,7 @@
             width: 100%;
             justify-content: center;
             margin-top: 5px;
+            position: relative;
         }
 
         .btn {
@@ -94,6 +97,8 @@
             background: linear-gradient(135deg, #444, #222);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             flex: 1;
+            position: relative;
+            transition: all 0.15s ease-out;
         }
 
         .options-grid {
@@ -171,7 +176,7 @@
             <h2>Bora marcar um date?</h2>
             <div class="btn-group">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
-                <button class="btn btn-nao" id="btn-nao" onmouseover="fugir()" onclick="fugir()">Não</button>
+                <button class="btn btn-nao" id="btn-nao" onmouseover="fugir(event)" ontouchstart="fugir(event)" onclick="fugir(event)">Não</button>
             </div>
         </div>
 
@@ -221,7 +226,6 @@
     </div>
 
     <script>
-        // Preencher a data e hora de hoje automaticamente ao carregar a página
         window.addEventListener('DOMContentLoaded', () => {
             const hoje = new Date();
             const ano = hoje.getFullYear();
@@ -267,11 +271,20 @@
             }
         }
 
-        function fugir() {
+        function fugir(e) {
+            if (e) e.preventDefault();
             const btnNao = document.getElementById('btn-nao');
-            const x = Math.random() * 160 - 80;
-            const y = Math.random() * 160 - 80;
-            btnNao.style.transform = `translate(${x}px, ${y}px)`;
+            
+            // Posição aleatória ampla baseada na janela visível
+            const maxX = window.innerWidth - btnNao.offsetWidth - 40;
+            const maxY = window.innerHeight - btnNao.offsetHeight - 40;
+            
+            const randomX = Math.random() * maxX - (window.innerWidth / 2 - btnNao.offsetLeft);
+            const randomY = Math.random() * maxY - (window.innerHeight / 2 - btnNao.offsetTop);
+
+            btnNao.style.position = 'fixed';
+            btnNao.style.left = `${Math.max(20, Math.min(maxX, window.innerWidth / 2 + randomX))}px`;
+            btnNao.style.top = `${Math.max(20, Math.min(maxY, window.innerHeight / 2 + randomY))}px`;
         }
 
         function selectOption(category, value, element) {
