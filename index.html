@@ -105,7 +105,8 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             flex: 1;
             position: relative;
-            transition: transform 0.15s ease-out;
+            /* Sem transição para teletransportar de forma instantânea e agressiva */
+            transition: none !important;
         }
 
         .options-grid {
@@ -194,7 +195,7 @@
             <h2>Bora marcar um date?</h2>
             <div class="btn-group" id="btn-group-container">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
-                <button class="btn btn-nao" id="btn-nao" onmouseenter="fugir(event)" ontouchstart="fugir(event)">Não</button>
+                <button class="btn btn-nao" id="btn-nao" onmouseenter="teletransportar(event)" ontouchstart="teletransportar(event)">Não</button>
             </div>
         </div>
 
@@ -306,32 +307,23 @@
         let currentX = 0;
         let currentY = 0;
 
-        function fugir(e) {
+        function teletransportar(e) {
             if (e.type === 'touchstart') {
-                e.preventDefault(); // Evita o clique em telas touch
+                e.preventDefault();
             }
-            
-            const btnNao = document.getElementById('btn-nao');
 
-            // Identifica se é dispositivo móvel (por largura de tela ou toque)
+            const btnNao = document.getElementById('btn-nao');
             const isMobile = window.innerWidth <= 768 || e.type === 'touchstart';
 
-            // No mobile, a distância de fuga é bem maior para garantir que o dedo não alcance
-            const multiplierX = isMobile ? 220 : 130;
-            const multiplierY = isMobile ? 180 : 100;
+            // Limites rígidos baseados na plataforma para não sair do cartão no mobile
+            const limitX = isMobile ? 90 : 160;
+            const limitY = isMobile ? 80 : 130;
 
-            const dirX = Math.random() > 0.5 ? 1 : -1;
-            const dirY = Math.random() > 0.5 ? 1 : -1;
+            const randomX = (Math.random() * 2 - 1) * limitX;
+            const randomY = (Math.random() * 2 - 1) * limitY;
 
-            currentX += dirX * (Math.random() * multiplierX + 60);
-            currentY += dirY * (Math.random() * multiplierY + 50);
-
-            // Limites de deslocamento ajustados para cada ambiente
-            const limitX = isMobile ? 150 : 140;
-            const limitY = isMobile ? 220 : 120;
-
-            currentX = Math.max(-limitX, Math.min(limitX, currentX));
-            currentY = Math.max(-limitY, Math.min(limitY, currentY));
+            currentX = randomX;
+            currentY = randomY;
 
             btnNao.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
