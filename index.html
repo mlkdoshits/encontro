@@ -102,11 +102,15 @@
 
         .btn-nao {
             background: linear-gradient(135deg, #444, #222);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: none !important;
             flex: 1;
             position: relative;
-            /* Sem transição para teletransportar de forma instantânea e agressiva */
             transition: none !important;
+        }
+
+        .btn-nao:hover {
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         .options-grid {
@@ -176,7 +180,6 @@
 <body>
 
     <div class="card" id="app-card">
-        <!-- TELA DE SENHA / MANUTENÇÃO -->
         <div id="screen-senha" class="screen">
             <div class="image-container">
                 <img src="img/rosas.png" alt="Manutenção">
@@ -187,7 +190,6 @@
             <button class="btn" onclick="verificarSenha()" style="width: 100%;">Entrar 🔓</button>
         </div>
 
-        <!-- TELA 1: Bora marcar um date? -->
         <div id="screen-1" class="screen hidden">
             <div class="image-container">
                 <img src="img/rosas.png" alt="Bora marcar um date">
@@ -199,7 +201,6 @@
             </div>
         </div>
 
-        <!-- TELA 2 -->
         <div id="screen-2" class="screen hidden">
             <div class="image-container">
                 <img src="img/vitoria.png" alt="Ta bom entao gostosa">
@@ -207,7 +208,6 @@
             <button class="btn" onclick="nextScreen(3)" style="width: 100%;">Próximo 💙</button>
         </div>
 
-        <!-- TELA 3 -->
         <div id="screen-3" class="screen hidden">
             <div class="image-container">
                 <img src="img/cafe.png" alt="Café e curvas">
@@ -217,7 +217,6 @@
             <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
         </div>
 
-        <!-- TELA 4: Opções de comida -->
         <div id="screen-4" class="screen hidden">
             <div class="options-grid" id="food-grid" style="margin-top: 5px;">
                 <div class="option-card" onclick="selectOption('food', 'Hambúrguer', this)"><span>🍔</span>Hambúrguer</div>
@@ -230,7 +229,6 @@
             <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 5px;">Escolher prato 🍽️</button>
         </div>
 
-        <!-- TELA 5: Resumo e Memes Aleatórios -->
         <div id="screen-5" class="screen hidden">
             <div class="image-container" id="final-img-container">
                 <img id="final-meme-img" src="img/meme1.png" alt="Meme final">
@@ -315,7 +313,6 @@
             const btnNao = document.getElementById('btn-nao');
             const isMobile = window.innerWidth <= 768 || e.type === 'touchstart';
 
-            // Limites rígidos baseados na plataforma para não sair do cartão no mobile
             const limitX = isMobile ? 90 : 160;
             const limitY = isMobile ? 80 : 130;
 
