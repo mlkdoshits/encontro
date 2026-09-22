@@ -78,6 +78,7 @@
             justify-content: center;
             margin-top: 5px;
             position: relative;
+            min-height: 50px;
         }
 
         .btn {
@@ -104,8 +105,12 @@
             background: linear-gradient(135deg, #444, #222);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             flex: 1;
-            position: relative;
-            transition: all 0.15s ease-out;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: calc(50% - 6px);
+            height: 100%;
+            transition: none; /* Sem atraso para fugir instantaneamente */
         }
 
         .options-grid {
@@ -192,7 +197,7 @@
                 <img src="img/rosas.png" alt="Bora marcar um date">
             </div>
             <h2>Bora marcar um date?</h2>
-            <div class="btn-group">
+            <div class="btn-group" id="btn-group-container">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
                 <button class="btn btn-nao" id="btn-nao" onmouseover="fugir(event)" ontouchstart="fugir(event)" onclick="fugir(event)">Não</button>
             </div>
@@ -307,15 +312,16 @@
             if (e) e.preventDefault();
             const btnNao = document.getElementById('btn-nao');
             
-            const maxX = window.innerWidth - btnNao.offsetWidth - 40;
-            const maxY = window.innerHeight - btnNao.offsetHeight - 40;
+            // Limites amplos dentro da tela
+            const maxX = window.innerWidth - btnNao.offsetWidth - 30;
+            const maxY = window.innerHeight - btnNao.offsetHeight - 30;
             
-            const randomX = Math.random() * maxX - (window.innerWidth / 2 - btnNao.offsetLeft);
-            const randomY = Math.random() * maxY - (window.innerHeight / 2 - btnNao.offsetTop);
+            const randomX = Math.random() * (maxX - 40) + 20;
+            const randomY = Math.random() * (maxY - 40) + 20;
 
             btnNao.style.position = 'fixed';
-            btnNao.style.left = `${Math.max(20, Math.min(maxX, window.innerWidth / 2 + randomX))}px`;
-            btnNao.style.top = `${Math.max(20, Math.min(maxY, window.innerHeight / 2 + randomY))}px`;
+            btnNao.style.left = `${randomX}px`;
+            btnNao.style.top = `${randomY}px`;
         }
 
         function selectOption(category, value, element) {
