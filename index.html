@@ -188,8 +188,8 @@
             <div class="image-container">
                 <img src="img/cafe.png" alt="Café e curvas">
             </div>
-            <input type="date" id="data-date" class="input-box" value="2025-06-21">
-            <input type="time" id="hora-date" class="input-box" value="19:00">
+            <input type="date" id="data-date" class="input-box">
+            <input type="time" id="hora-date" class="input-box">
             <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
         </div>
 
@@ -212,8 +212,8 @@
                 <img id="final-meme-img" src="img/meme1.png" alt="Meme final">
             </div>
             <div class="summary-box">
-                <div>📅 <span id="res-data">21/06/2025</span></div>
-                <div>⏰ <span id="res-hora">19:00</span></div>
+                <div>📅 <span id="res-data"></span></div>
+                <div>⏰ <span id="res-hora"></span></div>
                 <div>🍽️ <span id="res-food">Pizza</span></div>
             </div>
             <button class="btn" onclick="enviarWhatsApp()" style="background: linear-gradient(135deg, #25d366, #128c7e); width: 100%;">Mandar Resposta no WhatsApp 📱</button>
@@ -221,9 +221,22 @@
     </div>
 
     <script>
+        // Preencher a data e hora de hoje automaticamente ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            const hoje = new Date();
+            const ano = hoje.getFullYear();
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+            const dia = String(hoje.getDate()).padStart(2, '0');
+            const horas = String(hoje.getHours()).padStart(2, '0');
+            const minutos = String(hoje.getMinutes()).padStart(2, '0');
+
+            document.getElementById('data-date').value = `${ano}-${mes}-${dia}`;
+            document.getElementById('hora-date').value = `${horas}:${minutos}`;
+        });
+
         let selectedData = {
-            date: '21/06/2025',
-            time: '19:00',
+            date: '',
+            time: '',
             food: ''
         };
 
