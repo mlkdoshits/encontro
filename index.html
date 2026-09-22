@@ -99,6 +99,7 @@
         .btn-nao {
             background: linear-gradient(135deg, #444, #222);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            flex: 1;
         }
 
         .options-grid {
@@ -171,7 +172,7 @@
         <!-- TELA DE SENHA / MANUTENÇÃO -->
         <div id="screen-senha" class="screen">
             <div class="image-container">
-                <img src="https://i.imgur.com/813uO4t.png" alt="Emoji Manutenção">
+                <img src="img/rosas.png" alt="Emoji Manutenção">
             </div>
             <h2>Site em Manutenção 🚧</h2>
             <p>O site se encontra em manutenção no momento. Insira a senha de acesso para continuar:</p>
@@ -179,10 +180,10 @@
             <button class="btn" onclick="verificarSenha()" style="width: 100%;">Entrar 🔓</button>
         </div>
 
-        <!-- TELA 1: Bora marcar um date? (Com a imagem oficial enviada) -->
+        <!-- TELA 1: Bora marcar um date? -->
         <div id="screen-1" class="screen hidden">
             <div class="image-container">
-                <img src="https://i.imgur.com/813uO4t.png" alt="Emoji com rosa na boca">
+                <img src="img/rosas.png" alt="Emoji com rosa na boca">
             </div>
             <h2>Bora marcar um date?</h2>
             <div class="btn-group">
@@ -194,7 +195,7 @@
         <!-- TELA 2 -->
         <div id="screen-2" class="screen hidden">
             <div class="image-container">
-                <img src="https://i.imgur.com/k9b6N4m.png" alt="Emoji Vitoria">
+                <img src="img/vitoria.png" alt="Emoji Vitoria">
             </div>
             <h2>ta bom entao gostosa</h2>
             <button class="btn" onclick="nextScreen(3)" style="margin-top: 15px; width: 100%;">Próximo 💙</button>
@@ -203,7 +204,7 @@
         <!-- TELA 3 -->
         <div id="screen-3" class="screen hidden">
             <div class="image-container">
-                <img src="https://i.imgur.com/r6w5q2s.png" alt="Emoji Café">
+                <img src="img/cafe.png" alt="Emoji Café">
             </div>
             <h2 style="font-size: 13px; line-height: 1.4;">Você cheia de curvas e eu aqui sem freio... me diz aí: quando vai ser o nosso acidente?</h2>
             <input type="date" id="data-date" class="input-box" value="2025-06-21">
@@ -224,10 +225,10 @@
             <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 10px;">Escolher prato 🍽️</button>
         </div>
 
-        <!-- TELA 5: Resumo e Mensagens Meme Aleatórias -->
+        <!-- TELA 5: Resumo e Memes Aleatórios -->
         <div id="screen-5" class="screen hidden">
             <div class="image-container" id="final-img-container">
-                <img id="final-meme-img" src="https://i.imgur.com/7gK5Y0m.png" alt="Meme final">
+                <img id="final-meme-img" src="img/meme1.png" alt="Meme final">
             </div>
             <div class="summary-box">
                 <div>📅 <span id="res-data">21/06/2025</span></div>
@@ -277,10 +278,10 @@
                 document.getElementById('res-food').innerText = selectedData.food || 'Não selecionado';
 
                 const memesFinais = [
-                    "https://i.imgur.com/7gK5Y0m.png", 
-                    "https://i.imgur.com/3Z8q2xL.png", 
-                    "https://i.imgur.com/9w2Q1vR.png", 
-                    "https://i.imgur.com/5f8V1kP.png"  
+                    "img/meme1.png", 
+                    "img/meme2.png", 
+                    "img/meme3.png", 
+                    "img/meme4.png"  
                 ];
                 const escolhido = memesFinais[Math.floor(Math.random() * memesFinais.length)];
                 document.getElementById('final-meme-img').src = escolhido;
