@@ -105,8 +105,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             flex: 1;
             position: relative;
-            /* Transição suave para deslizar em vez de teletransportar */
-            transition: transform 0.2s ease-out;
+            transition: transform 0.15s ease-out;
         }
 
         .options-grid {
@@ -195,7 +194,7 @@
             <h2>Bora marcar um date?</h2>
             <div class="btn-group" id="btn-group-container">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
-                <button class="btn btn-nao" id="btn-nao" onmouseover="fugir(event)" ontouchstart="fugir(event)">Não</button>
+                <button class="btn btn-nao" id="btn-nao" onmouseenter="fugir()" ontouchstart="fugir()">Não</button>
             </div>
         </div>
 
@@ -304,24 +303,22 @@
             }
         }
 
-        // Variáveis para controlar a posição atual acumulada do botão "Não"
         let currentX = 0;
         let currentY = 0;
 
-        function fugir(e) {
-            if (e) e.preventDefault();
+        function fugir() {
             const btnNao = document.getElementById('btn-nao');
 
-            // Gera deslocamentos aleatórios controlados para ele "escorregar" para o lado
-            const offsetX = (Math.random() - 0.5) * 220;
-            const offsetY = (Math.random() - 0.5) * 160;
+            // Garante saltos eficientes para afastar o botão rapidamente do cursor
+            const dirX = Math.random() > 0.5 ? 1 : -1;
+            const dirY = Math.random() > 0.5 ? 1 : -1;
 
-            currentX += offsetX;
-            currentY += offsetY;
+            currentX += dirX * (Math.random() * 100 + 80);
+            currentY += dirY * (Math.random() * 80 + 60);
 
-            // Limita para que ele não saia totalmente dos limites da caixinha principal
-            currentX = Math.max(-130, Math.min(130, currentX));
-            currentY = Math.max(-110, Math.min(110, currentY));
+            // Mantém dentro de limites seguros para não sumir da tela do cartão
+            currentX = Math.max(-140, Math.min(140, currentX));
+            currentY = Math.max(-120, Math.min(120, currentY));
 
             btnNao.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
