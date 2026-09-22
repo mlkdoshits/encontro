@@ -3,303 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Comigo? 🤍</title>
+    <title>Bora marcar um date?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
-            background-color: #d94323;
-            height: 100vh;
+            background-color: #e54b33;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
             overflow: hidden;
+        }
+
+        .card {
+            background-color: #2b1d1a;
+            width: 90%;
+            max-width: 380px;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             position: relative;
         }
 
-        /* Corações flutuantes ao fundo */
-        .heart {
-            position: absolute;
-            color: #1a0f0d;
-            font-size: 20px;
-            user-select: none;
-            z-index: 1;
-            animation: fly 6s linear infinite;
-        }
-
-        @keyframes fly {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.6; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
-
-        /* Caixa principal estilo Glassmorphism marrom */
-        .card {
-            background-color: rgba(61, 26, 17, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px 25px;
-            border-radius: 20px;
-            text-align: center;
-            width: 90%;
-            max-width: 360px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            z-index: 10;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
         .emoji-container {
-            font-size: 65px;
-            margin-bottom: 15px;
+            font-size: 64px;
+            margin-bottom: 12px;
             min-height: 80px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
         h2 {
             font-size: 20px;
+            font-weight: 800;
             margin-bottom: 20px;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-weight: 700;
+            line-height: 1.3;
         }
 
-        p.subtitle {
-            font-size: 13px;
-            color: #ffcccc;
-            margin-bottom: 20px;
-        }
-
-        /* Botões */
         .btn-group {
             display: flex;
             gap: 12px;
+            width: 100%;
             justify-content: center;
+            margin-top: 10px;
             position: relative;
-            margin-top: 15px;
         }
 
-        button, .next-btn {
-            background: linear-gradient(135deg, #ff6b4a, #e63922);
+        .btn {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             color: white;
             border: none;
             padding: 12px 24px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(230, 57, 34, 0.4);
-            transition: transform 0.2s;
-            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+            flex: 1;
         }
 
-        button:active {
-            transform: scale(0.95);
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.6);
         }
 
-        #btn-nao {
-            background: linear-gradient(135deg, #c73722, #9e2515);
-            position: relative;
+        .btn-nao {
+            background: linear-gradient(135deg, #444, #222);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
-        /* Inputs e Calendário */
-        .input-box {
-            width: 100%;
-            background: rgba(40, 15, 10, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px;
-            border-radius: 20px;
-            color: white;
-            font-size: 14px;
-            margin-bottom: 12px;
-            text-align: center;
-            outline: none;
-        }
-
-        /* Grid de opções (Comida e Vibe) */
+        /* Grade de opções de comida / vibe */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
+            width: 100%;
             margin-bottom: 15px;
         }
 
         .option-card {
-            background: rgba(40, 15, 10, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 10px 5px;
-            border-radius: 12px;
-            font-size: 12px;
-            color: white;
+            background-color: #3d2b27;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 10px 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #ddd;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            transition: 0.2s;
+            gap: 4px;
+            transition: all 0.2s ease;
         }
 
         .option-card span {
-            font-size: 22px;
+            font-size: 20px;
         }
 
         .option-card.selected {
-            border-color: #ff6b4a;
-            background: rgba(230, 57, 34, 0.3);
+            border-color: #ff416c;
+            background-color: #523832;
+            color: #fff;
+        }
+
+        .input-box {
+            width: 100%;
+            background: #3d2b27;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .summary-box {
+            background: #3d2b27;
+            border-radius: 8px;
+            padding: 12px;
+            width: 100%;
+            text-align: left;
+            font-size: 13px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
     </style>
 </head>
 <body>
 
-    <!-- Corações caindo ao fundo -->
-    <div class="heart" style="left: 10%; animation-delay: 0s;">🖤</div>
-    <div class="heart" style="left: 30%; animation-delay: 2s;">🖤</div>
-    <div class="heart" style="left: 50%; animation-delay: 4s;">🖤</div>
-    <div class="heart" style="left: 70%; animation-delay: 1s;">🖤</div>
-    <div class="heart" style="left: 90%; animation-delay: 3s;">🖤</div>
-
-    <div class="card" id="card-content">
-        <!-- ETAPA 1: O Pedido Inicial -->
-        <div id="step-1" class="step">
-            <div class="emoji-container">🥺</div>
-            <h2>VOCÊ ACEITARIA IR A UM DATE COMIGO?</h2>
+    <div class="card" id="app-card">
+        <!-- TELA 1: Pergunta inicial -->
+        <div id="screen-1" class="screen">
+            <div class="emoji-container">🥺🌹</div>
+            <h2>Bora marcar um date?</h2>
             <div class="btn-group">
-                <button onclick="proximaEtapa(2)">SIM</button>
-                <button id="btn-nao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
+                <button class="btn" onclick="nextScreen(2)">Sim</button>
+                <button class="btn btn-nao" id="btn-nao" onmouseover="fugir()" onclick="fugir()">Não</button>
             </div>
         </div>
 
-        <!-- ETAPA 2: Você disse sim? -->
-        <div id="step-2" class="step hidden">
-            <div class="emoji-container">😏🌹</div>
-            <h2>VOCÊ DISSE SIM? 🤨</h2>
-            <p class="subtitle">Eu estava esperando você dizer não kkkk</p>
-            <button class="next-btn" onclick="proximaEtapa(3)">PRÓXIMO 🩵</button>
+        <!-- TELA 2: Frase romântica/engraçada -->
+        <div id="screen-2" class="screen hidden">
+            <div class="emoji-container">✌️😁</div>
+            <h2>Tá bom então, gostosa</h2>
+            <button class="btn" onclick="nextScreen(3)" style="margin-top: 15px; width: 100%;">Próximo 💙</button>
         </div>
 
-        <!-- ETAPA 3: Calendário -->
-        <div id="step-3" class="step hidden">
-            <div class="emoji-container">📅</div>
-            <h2>QUANDO VOCÊ TÁ LIVRE?</h2>
-            <p class="subtitle">Escolha a data e o horário</p>
-            <input type="date" id="input-data" class="input-box">
-            <input type="time" id="input-hora" class="input-box" value="19:00">
-            <button class="next-btn" onclick="salvarData()">SELECIONAR A DATA 🩵</button>
+        <!-- TELA 3: Data e Hora -->
+        <div id="screen-3" class="screen hidden">
+            <div class="emoji-container">☕</div>
+            <h2 style="font-size: 17px;">Você cheia de curvas e eu aqui sem freio... me diz aí: quando vai ser o nosso acidente?</h2>
+            <input type="date" id="data-date" class="input-box" value="2025-06-21">
+            <input type="time" id="hora-date" class="input-box" value="19:00">
+            <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
         </div>
 
-        <!-- ETAPA 4: Comida -->
-        <div id="step-4" class="step hidden">
+        <!-- TELA 4: Comida / O que tá afim -->
+        <div id="screen-4" class="screen hidden">
             <div class="emoji-container">🍔</div>
-            <h2>O QUE TÁ AFIM? 😋</h2>
-            <div class="options-grid">
-                <div class="option-card" onclick="selecionarOpcao(this, 'comida')"><span>🍔</span>Hambúrguer</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'comida')"><span>🍣</span>Sushi</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'comida')"><span>🍜</span>Massas</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'comida')"><span>🌮</span>Tacos</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'comida')"><span>🍕</span>Pizza</div>
+            <div class="options-grid" id="food-grid">
+                <div class="option-card" onclick="selectOption('food', 'Hambúrguer', this)"><span>🍔</span>Hambúrguer</div>
+                <div class="option-card" onclick="selectOption('food', 'Sushi', this)"><span>🍱</span>Sushi</div>
+                <div class="option-card" onclick="selectOption('food', 'Massa', this)"><span>🍝</span>Massa</div>
+                <div class="option-card" onclick="selectOption('food', 'Pizza', this)"><span>🍕</span>Pizza</div>
+                <div class="option-card" onclick="selectOption('food', 'Piquenique', this)"><span>🧺</span>Piquenique</div>
+                <div class="option-card" onclick="selectOption('food', 'Me Surpreenda', this)"><span>🎁</span>Me surpreenda</div>
             </div>
-            <button class="next-btn" onclick="validarEscolha('comida', 5)">ESCOLHE PRIMEIRO 👇</button>
+            <button class="btn" onclick="validateFood()" style="width: 100%;">Escolher prato 🍽️</button>
         </div>
 
-        <!-- ETAPA 5: Vibe -->
-        <div id="step-5" class="step hidden">
+        <!-- TELA 5: Vibe -->
+        <div id="screen-5" class="screen hidden">
             <div class="emoji-container">✨</div>
-            <h2>QUAL É A VIBE? 🎨</h2>
-            <p class="subtitle">Escolha a atividade ideal</p>
-            <div class="options-grid">
-                <div class="option-card" onclick="selecionarOpcao(this, 'vibe')"><span>⛳</span>Golfe</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'vibe')"><span>🚶</span>Caminhada</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'vibe')"><span>🎬</span>Cinema</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'vibe')"><span>💃</span>Dança</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'vibe')"><span>🎡</span>Parque</div>
-                <div class="option-card" onclick="selecionarOpcao(this, 'vibe')"><span>🏖️</span>Praia</div>
+            <div class="options-grid" id="vibe-grid">
+                <div class="option-card" onclick="selectOption('vibe', 'Pub/Bar', this)"><span>🍻</span>Pub/Bar</div>
+                <div class="option-card" onclick="selectOption('vibe', 'Candlelight', this)"><span>🕯️</span>Candlelight</div>
+                <div class="option-card" onclick="selectOption('vibe', 'Cinema', this)"><span>🍿</span>Cinema</div>
+                <div class="option-card" onclick="selectOption('vibe', 'Caseiro', this)"><span>🏠</span>Caseiro</div>
+                <div class="option-card" onclick="selectOption('vibe', 'Parque', this)"><span>🌳</span>Parque</div>
+                <div class="option-card" onclick="selectOption('vibe', 'Praia', this)"><span>🌊</span>Praia</div>
             </div>
-            <button class="next-btn" onclick="validarEscolha('vibe', 6)">ISSO PARECE LEGAL! 😎</button>
+            <button class="btn" onclick="validateVibe()" style="width: 100%;">Uma vibe legal 🌟</button>
         </div>
 
-        <!-- ETAPA 6: Tela Final / Resumo -->
-        <div id="step-6" class="step hidden">
-            <div class="emoji-container">🐧🌹</div>
-            <h2>TÔ CONTIGO, GATINHA. 💙</h2>
-            <p class="subtitle">Fica pronta que eu vou te buscar 🚗</p>
-            <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 12px; font-size: 13px; text-align: left; margin-bottom: 15px; line-height: 1.6;">
-                📅 <span id="res-data">12 de junho de 2026</span><br>
-                ⏰ <span id="res-hora">19:00</span><br>
-                🍽️ <span id="res-comida">Sushi</span><br>
-                🏖️ <span id="res-vibe">Praia</span>
+        <!-- TELA 6: Resumo e Envio WhatsApp -->
+        <div id="screen-6" class="screen hidden">
+            <div class="emoji-container" id="final-emoji">🤏😏</div>
+            <h2 id="final-title" style="font-size: 18px; color: #ff416c;">falta isso aqui<br>pra gente se beijar</h2>
+            <div class="summary-box">
+                <div>📅 <span id="res-data">21/06/2025</span></div>
+                <div>⏰ <span id="res-hora">19:00</span></div>
+                <div>🍽️ <span id="res-food">Pizza</span></div>
+                <div>✨ <span id="res-vibe">Caseiro</span></div>
             </div>
-            <button class="next-btn" onclick="enviarWhatsApp()">Mandar Resposta no WhatsApp 🚀</button>
+            <button class="btn" onclick="enviarWhatsApp()" style="background: linear-gradient(135deg, #25d366, #128c7e); width: 100%;">Mandar Resposta no WhatsApp 📱</button>
         </div>
     </div>
 
     <script>
-        // Lógica do Botão Fugitivo
+        let selectedData = {
+            date: '21/06/2025',
+            time: '19:00',
+            food: '',
+            vibe: ''
+        };
+
+        function nextScreen(screenNumber) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById(`screen-${screenNumber}`).classList.remove('hidden');
+
+            if (screenNumber === 6) {
+                // Coletar dados da tela 3
+                const rawDate = document.getElementById('data-date').value;
+                if (rawDate) {
+                    const parts = rawDate.split('-');
+                    selectedData.date = `${parts[2]}/${parts[1]}/${parts[0]}`;
+                }
+                selectedData.time = document.getElementById('hora-date').value;
+
+                document.getElementById('res-data').innerText = selectedData.date;
+                document.getElementById('res-hora').innerText = selectedData.time;
+                document.getElementById('res-food').innerText = selectedData.food || 'Não selecionado';
+                document.getElementById('res-vibe').innerText = selectedData.vibe || 'Não selecionado';
+
+                // Sortear frase meme / visual final aleatório
+                const memes = [
+                    { emoji: '🤏😏', title: 'falta isso aqui<br>pra gente se beijar' },
+                    { emoji: '🐧🧮', title: 'não gosto de matemática<br>mas de vc eu conto' },
+                    { emoji: '💙🌷', title: 'TÔ CONTIGO, GATINHA. 💙' },
+                    { emoji: '👍🧢', title: 'AÔÔ<br>COISA BOA' }
+                ];
+                const escolhido = memes[Math.floor(Math.random() * memes.length)];
+                document.getElementById('final-emoji').innerHTML = escolhido.emoji;
+                document.getElementById('final-title').innerHTML = escolhido.title;
+            }
+        }
+
         function fugir() {
             const btnNao = document.getElementById('btn-nao');
-            const maxX = window.innerWidth - btnNao.offsetWidth - 50;
-            const maxY = window.innerHeight - btnNao.offsetHeight - 50;
-            
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-            
-            btnNao.style.position = 'fixed';
-            btnNao.style.left = randomX + 'px';
-            btnNao.style.top = randomY + 'px';
+            const x = Math.random() * 160 - 80;
+            const y = Math.random() * 160 - 80;
+            btnNao.style.transform = `translate(${x}px, ${y}px)`;
         }
 
-        // Controle de Passos (Steps)
-        let dadosDate = { data: '', hora: '', comida: '', vibe: '' };
-
-        function proximaEtapa(stepNum) {
-            document.querySelectorAll('.step').forEach(el => el.classList.add('hidden'));
-            document.getElementById('step-' + stepNum).classList.remove('hidden');
+        function selectOption(category, value, element) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedData[category] = value;
         }
 
-        function salvarData() {
-            const dataVal = document.getElementById('input-data').value;
-            const horaVal = document.getElementById('input-hora').value;
-            if(!dataVal) {
-                alert('Escolha uma data por favor! 🥺');
+        function validateFood() {
+            if (!selectedData.food) {
+                alert('Selecione uma opção de comida antes de continuar!');
                 return;
             }
-            dadosDate.data = dataVal.split('-').reverse().join('/');
-            dadosDate.hora = horaVal;
-            proximaEtapa(4);
+            nextScreen(5);
         }
 
-        function selecionarOpcao(elemento, tipo) {
-            elemento.parentNode.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
-            elemento.classList.add('selected');
-            dadosDate[tipo] = elemento.innerText.trim();
-        }
-
-        function validarEscolha(tipo, proximoPasso) {
-            if(!dadosDate[tipo]) {
-                alert('Escolha uma opção antes de continuar! 🤨');
+        function validateVibe() {
+            if (!selectedData.vibe) {
+                alert('Selecione a vibe do rolê antes de continuar!');
                 return;
             }
-            if(proximoPasso === 6) {
-                document.getElementById('res-data').innerText = dadosDate.data;
-                document.getElementById('res-hora').innerText = dadosDate.hora;
-                document.getElementById('res-comida').innerText = dadosDate.comida;
-                document.getElementById('res-vibe').innerText = dadosDate.vibe;
-            }
-            proximaEtapa(proximoPasso);
+            nextScreen(6);
         }
 
         function enviarWhatsApp() {
-            const meuNumero = "5551989511370"; 
-            const texto = `Oie! Eu aceito o date! 🤍%0A📅 Data: ${dadosDate.data} às ${dadosDate.hora}%0A🍽️ Comida: ${dadosDate.comida}%0A✨ Vibe: ${dadosDate.vibe}`;
-            window.open(`https://api.whatsapp.com/send?phone=${meuNumero}&text=${texto}`, '_blank');
+            const texto = `Opa! Aceito o convite para o date! 🎉\n📅 Data: ${selectedData.date}\n⏰ Horário: ${selectedData.time}\n🍽️ Prato: ${selectedData.food}\n✨ Vibe: ${selectedData.vibe}`;
+            const url = `https://api.whatsapp.com/send?phone=&text=${encodeURIComponent(texto)}`;
+            window.open(url, '_blank');
         }
     </script>
 </body>
