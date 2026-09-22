@@ -55,10 +55,17 @@
         h2 {
             font-size: 18px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             line-height: 1.3;
+        }
+
+        p {
+            font-size: 14px;
+            color: #ddd;
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
         .btn-group {
@@ -96,7 +103,7 @@
 
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 8px;
             width: 100%;
             margin-bottom: 15px;
@@ -161,8 +168,19 @@
 <body>
 
     <div class="card" id="app-card">
+        <!-- TELA DE SENHA / MANUTENÇÃO -->
+        <div id="screen-senha" class="screen">
+            <div class="image-container">
+                <img src="https://i.imgur.com/813uO4t.png" alt="Emoji Manutenção">
+            </div>
+            <h2>Site em Manutenção 🚧</h2>
+            <p>O site se encontra em manutenção no momento. Insira a senha de acesso para continuar:</p>
+            <input type="password" id="input-senha" class="input-box" placeholder="Senha secreta...">
+            <button class="btn" onclick="verificarSenha()" style="width: 100%;">Entrar 🔓</button>
+        </div>
+
         <!-- TELA 1 -->
-        <div id="screen-1" class="screen">
+        <div id="screen-1" class="screen hidden">
             <div class="image-container">
                 <img src="https://i.imgur.com/813uO4t.png" alt="Emoji com rosa">
             </div>
@@ -193,9 +211,9 @@
             <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
         </div>
 
-        <!-- TELA 4: Opções de comida atualizadas (com Piquenique e Me surpreenda) -->
+        <!-- TELA 4: Opções de comida -->
         <div id="screen-4" class="screen hidden">
-            <div class="options-grid" id="food-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 10px;">
+            <div class="options-grid" id="food-grid" style="margin-top: 10px;">
                 <div class="option-card" onclick="selectOption('food', 'Hambúrguer', this)"><span>🍔</span>Hambúrguer</div>
                 <div class="option-card" onclick="selectOption('food', 'Sushi', this)"><span>🍱</span>Sushi</div>
                 <div class="option-card" onclick="selectOption('food', 'Massa', this)"><span>🍝</span>Massa</div>
@@ -206,21 +224,8 @@
             <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 10px;">Escolher prato 🍽️</button>
         </div>
 
-        <!-- TELA 5: Vibe -->
+        <!-- TELA 5: Resumo e Mensagens Meme Aleatórias -->
         <div id="screen-5" class="screen hidden">
-            <div class="options-grid" id="vibe-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 10px;">
-                <div class="option-card" onclick="selectOption('vibe', 'Pub/Bar', this)"><span>🍻</span>Pub/Bar</div>
-                <div class="option-card" onclick="selectOption('vibe', 'Candlelight', this)"><span>🕯️</span>Candlelight</div>
-                <div class="option-card" onclick="selectOption('vibe', 'Cinema', this)"><span>🍿</span>Cinema</div>
-                <div class="option-card" onclick="selectOption('vibe', 'Caseiro', this)"><span>🏠</span>Caseiro</div>
-                <div class="option-card" onclick="selectOption('vibe', 'Parque', this)"><span>🌳</span>Parque</div>
-                <div class="option-card" onclick="selectOption('vibe', 'Praia', this)"><span>🌊</span>Praia</div>
-            </div>
-            <button class="btn" onclick="validateVibe()" style="width: 100%; margin-top: 10px;">Uma vibe legal 🌟</button>
-        </div>
-
-        <!-- TELA 6: Resumo e Mensagens Meme Aleatórias -->
-        <div id="screen-6" class="screen hidden">
             <div class="image-container" id="final-img-container">
                 <img id="final-meme-img" src="https://i.imgur.com/7gK5Y0m.png" alt="Meme final">
             </div>
@@ -228,7 +233,6 @@
                 <div>📅 <span id="res-data">21/06/2025</span></div>
                 <div>⏰ <span id="res-hora">19:00</span></div>
                 <div>🍽️ <span id="res-food">Pizza</span></div>
-                <div>✨ <span id="res-vibe">Caseiro</span></div>
             </div>
             <button class="btn" onclick="enviarWhatsApp()" style="background: linear-gradient(135deg, #25d366, #128c7e); width: 100%;">Mandar Resposta no WhatsApp 📱</button>
         </div>
@@ -238,15 +242,29 @@
         let selectedData = {
             date: '21/06/2025',
             time: '19:00',
-            food: '',
-            vibe: ''
+            food: ''
         };
+
+        function verificarSenha() {
+            const senhaDigitada = document.getElementById('input-senha').value;
+            if (senhaDigitada === '12345fsc') {
+                nextScreen(1);
+            } else {
+                alert('Senha incorreta! Tente novamente.');
+            }
+        }
 
         function nextScreen(screenNumber) {
             document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-            document.getElementById(`screen-${screenNumber}`).classList.remove('hidden');
+            
+            let targetId = '';
+            if (screenNumber === 'senha') targetId = 'screen-senha';
+            else if (screenNumber === 5) targetId = 'screen-5';
+            else targetId = `screen-${screenNumber}`;
 
-            if (screenNumber === 6) {
+            document.getElementById(targetId).classList.remove('hidden');
+
+            if (screenNumber === 5) {
                 const rawDate = document.getElementById('data-date').value;
                 if (rawDate) {
                     const parts = rawDate.split('-');
@@ -257,14 +275,12 @@
                 document.getElementById('res-data').innerText = selectedData.date;
                 document.getElementById('res-hora').innerText = selectedData.time;
                 document.getElementById('res-food').innerText = selectedData.food || 'Não selecionado';
-                document.getElementById('res-vibe').innerText = selectedData.vibe || 'Não selecionado';
 
-                // Lista de memes aleatórios para a última página conforme o relatório
                 const memesFinais = [
-                    "https://i.imgur.com/7gK5Y0m.png", // Beijinho / Falta isso aqui
-                    "https://i.imgur.com/3Z8q2xL.png", // Pinguim matemática
-                    "https://i.imgur.com/9w2Q1vR.png", // Tô contigo gatinha
-                    "https://i.imgur.com/5f8V1kP.png"  // Aôô coisa boa
+                    "https://i.imgur.com/7gK5Y0m.png", 
+                    "https://i.imgur.com/3Z8q2xL.png", 
+                    "https://i.imgur.com/9w2Q1vR.png", 
+                    "https://i.imgur.com/5f8V1kP.png"  
                 ];
                 const escolhido = memesFinais[Math.floor(Math.random() * memesFinais.length)];
                 document.getElementById('final-meme-img').src = escolhido;
@@ -293,16 +309,8 @@
             nextScreen(5);
         }
 
-        function validateVibe() {
-            if (!selectedData.vibe) {
-                alert('Selecione a vibe do rolê!');
-                return;
-            }
-            nextScreen(6);
-        }
-
         function enviarWhatsApp() {
-            const texto = `Opa! Aceito o convite para o date! 🎉\n📅 Data: ${selectedData.date}\n⏰ Horário: ${selectedData.time}\n🍽️ Prato: ${selectedData.food}\n✨ Vibe: ${selectedData.vibe}`;
+            const texto = `Opa! Aceito o convite para o date! 🎉\n📅 Data: ${selectedData.date}\n⏰ Horário: ${selectedData.time}\n🍽️ Prato: ${selectedData.food}`;
             const url = `https://api.whatsapp.com/send?phone=&text=${encodeURIComponent(texto)}`;
             window.open(url, '_blank');
         }
