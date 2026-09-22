@@ -180,17 +180,8 @@
 <body>
 
     <div class="card" id="app-card">
-        <div id="screen-senha" class="screen">
-            <div class="image-container">
-                <img src="img/rosas.png" alt="Manutenção">
-            </div>
-            <h2>Site em Manutenção 🚧</h2>
-            <p>O site se encontra em manutenção no momento. Insira a senha de acesso para continuar:</p>
-            <input type="password" id="input-senha" class="input-box" placeholder="Senha secreta...">
-            <button class="btn" onclick="verificarSenha()" style="width: 100%;">Entrar 🔓</button>
-        </div>
-
-        <div id="screen-1" class="screen hidden">
+        <!-- TELA 1: Bora marcar um date? (Agora é a primeira tela) -->
+        <div id="screen-1" class="screen">
             <div class="image-container">
                 <img src="img/rosas.png" alt="Bora marcar um date">
             </div>
@@ -201,6 +192,7 @@
             </div>
         </div>
 
+        <!-- TELA 2 -->
         <div id="screen-2" class="screen hidden">
             <div class="image-container">
                 <img src="img/vitoria.png" alt="Ta bom entao gostosa">
@@ -208,6 +200,7 @@
             <button class="btn" onclick="nextScreen(3)" style="width: 100%;">Próximo 💙</button>
         </div>
 
+        <!-- TELA 3 -->
         <div id="screen-3" class="screen hidden">
             <div class="image-container">
                 <img src="img/cafe.png" alt="Café e curvas">
@@ -217,6 +210,7 @@
             <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
         </div>
 
+        <!-- TELA 4: Opções de comida -->
         <div id="screen-4" class="screen hidden">
             <div class="options-grid" id="food-grid" style="margin-top: 5px;">
                 <div class="option-card" onclick="selectOption('food', 'Hambúrguer', this)"><span>🍔</span>Hambúrguer</div>
@@ -229,6 +223,7 @@
             <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 5px;">Escolher prato 🍽️</button>
         </div>
 
+        <!-- TELA 5: Resumo e Memes Aleatórios -->
         <div id="screen-5" class="screen hidden">
             <div class="image-container" id="final-img-container">
                 <img id="final-meme-img" src="img/meme1.png" alt="Meme final">
@@ -261,29 +256,10 @@
             food: ''
         };
 
-        async function verificarSenha() {
-            const senhaDigitada = document.getElementById('input-senha').value;
-            const msgBuffer = new TextEncoder().encode(senhaDigitada);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const senhaHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-            const hashCorreto = 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f';
-
-            if (senhaHash === hashCorreto) {
-                nextScreen(1);
-            } else {
-                alert('Senha incorreta! Tente novamente.');
-            }
-        }
-
         function nextScreen(screenNumber) {
             document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
             
-            let targetId = '';
-            if (screenNumber === 'senha') targetId = 'screen-senha';
-            else targetId = `screen-${screenNumber}`;
-
+            const targetId = `screen-${screenNumber}`;
             document.getElementById(targetId).classList.remove('hidden');
 
             if (screenNumber === 5) {
