@@ -1,12 +1,12 @@
 {
-  "name": "site-do-date",
+  "name": "encuentro",
   "version": "1.0.0",
-  "description": "Site de convite de date interativo",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.18.2"
   }
 }
