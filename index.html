@@ -78,7 +78,6 @@
             justify-content: center;
             margin-top: 5px;
             position: relative;
-            min-height: 50px;
         }
 
         .btn {
@@ -105,12 +104,7 @@
             background: linear-gradient(135deg, #444, #222);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             flex: 1;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: calc(50% - 6px);
-            height: 100%;
-            transition: none; /* Sem atraso para fugir instantaneamente */
+            transition: none;
         }
 
         .options-grid {
@@ -312,7 +306,6 @@
             if (e) e.preventDefault();
             const btnNao = document.getElementById('btn-nao');
             
-            // Limites amplos dentro da tela
             const maxX = window.innerWidth - btnNao.offsetWidth - 30;
             const maxY = window.innerHeight - btnNao.offsetHeight - 30;
             
