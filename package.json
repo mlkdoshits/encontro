@@ -1,7 +1,7 @@
 {
-  "name": "marketforum",
+  "name": "site-do-date",
   "version": "1.0.0",
-  "description": "MarketPlace Forum Network",
+  "description": "Site de convite de date interativo com memes",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
