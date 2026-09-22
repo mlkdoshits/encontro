@@ -1,7 +1,7 @@
 {
   "name": "site-do-date",
   "version": "1.0.0",
-  "description": "Site de convite de date interativo com memes",
+  "description": "Site de convite de date interativo",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
