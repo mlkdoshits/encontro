@@ -39,26 +39,18 @@
 
         .image-container {
             width: 100%;
-            max-height: 150px;
+            max-height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .image-container img {
-            max-width: 120px;
+            max-width: 140px;
+            max-height: 150px;
             height: auto;
             object-fit: contain;
-        }
-
-        h2 {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            line-height: 1.3;
         }
 
         p {
@@ -172,41 +164,37 @@
         <!-- TELA DE SENHA / MANUTENÇÃO -->
         <div id="screen-senha" class="screen">
             <div class="image-container">
-                <img src="img/rosas.png" alt="Emoji Manutenção">
+                <img src="img/rosas.png" alt="Manutenção">
             </div>
-            <h2>Site em Manutenção 🚧</h2>
             <p>O site se encontra em manutenção no momento. Insira a senha de acesso para continuar:</p>
             <input type="password" id="input-senha" class="input-box" placeholder="Senha secreta...">
             <button class="btn" onclick="verificarSenha()" style="width: 100%;">Entrar 🔓</button>
         </div>
 
-        <!-- TELA 1: Bora marcar um date? -->
+        <!-- TELA 1: Bora marcar um date? (Apenas a figurinha) -->
         <div id="screen-1" class="screen hidden">
             <div class="image-container">
-                <img src="img/rosas.png" alt="Emoji com rosa na boca">
+                <img src="img/rosas.png" alt="Bora marcar um date">
             </div>
-            <h2>Bora marcar um date?</h2>
             <div class="btn-group">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
                 <button class="btn btn-nao" id="btn-nao" onmouseover="fugir()" onclick="fugir()">Não</button>
             </div>
         </div>
 
-        <!-- TELA 2 -->
+        <!-- TELA 2: (Apenas a figurinha) -->
         <div id="screen-2" class="screen hidden">
             <div class="image-container">
-                <img src="img/vitoria.png" alt="Emoji Vitoria">
+                <img src="img/vitoria.png" alt="Ta bom entao gostosa">
             </div>
-            <h2>ta bom entao gostosa</h2>
-            <button class="btn" onclick="nextScreen(3)" style="margin-top: 15px; width: 100%;">Próximo 💙</button>
+            <button class="btn" onclick="nextScreen(3)" style="width: 100%;">Próximo 💙</button>
         </div>
 
-        <!-- TELA 3 -->
+        <!-- TELA 3: (Apenas a figurinha com o texto embutido) -->
         <div id="screen-3" class="screen hidden">
             <div class="image-container">
-                <img src="img/cafe.png" alt="Emoji Café">
+                <img src="img/cafe.png" alt="Café e curvas">
             </div>
-            <h2 style="font-size: 13px; line-height: 1.4;">Você cheia de curvas e eu aqui sem freio... me diz aí: quando vai ser o nosso acidente?</h2>
             <input type="date" id="data-date" class="input-box" value="2025-06-21">
             <input type="time" id="hora-date" class="input-box" value="19:00">
             <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
@@ -214,7 +202,7 @@
 
         <!-- TELA 4: Opções de comida -->
         <div id="screen-4" class="screen hidden">
-            <div class="options-grid" id="food-grid" style="margin-top: 10px;">
+            <div class="options-grid" id="food-grid" style="margin-top: 5px;">
                 <div class="option-card" onclick="selectOption('food', 'Hambúrguer', this)"><span>🍔</span>Hambúrguer</div>
                 <div class="option-card" onclick="selectOption('food', 'Sushi', this)"><span>🍱</span>Sushi</div>
                 <div class="option-card" onclick="selectOption('food', 'Massa', this)"><span>🍝</span>Massa</div>
@@ -222,7 +210,7 @@
                 <div class="option-card" onclick="selectOption('food', 'Piquenique', this)"><span>🧺</span>Piquenique</div>
                 <div class="option-card" onclick="selectOption('food', 'Me Surpreenda', this)"><span>🎁</span>Me surpreenda</div>
             </div>
-            <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 10px;">Escolher prato 🍽️</button>
+            <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 5px;">Escolher prato 🍽️</button>
         </div>
 
         <!-- TELA 5: Resumo e Memes Aleatórios -->
