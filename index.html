@@ -104,7 +104,9 @@
             background: linear-gradient(135deg, #444, #222);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             flex: 1;
-            transition: none;
+            position: relative;
+            /* Transição suave para deslizar em vez de teletransportar */
+            transition: transform 0.2s ease-out;
         }
 
         .options-grid {
@@ -193,7 +195,7 @@
             <h2>Bora marcar um date?</h2>
             <div class="btn-group" id="btn-group-container">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
-                <button class="btn btn-nao" id="btn-nao" onmouseover="fugir(event)" ontouchstart="fugir(event)" onclick="fugir(event)">Não</button>
+                <button class="btn btn-nao" id="btn-nao" onmouseover="fugir(event)" ontouchstart="fugir(event)">Não</button>
             </div>
         </div>
 
@@ -302,19 +304,26 @@
             }
         }
 
+        // Variáveis para controlar a posição atual acumulada do botão "Não"
+        let currentX = 0;
+        let currentY = 0;
+
         function fugir(e) {
             if (e) e.preventDefault();
             const btnNao = document.getElementById('btn-nao');
-            
-            const maxX = window.innerWidth - btnNao.offsetWidth - 30;
-            const maxY = window.innerHeight - btnNao.offsetHeight - 30;
-            
-            const randomX = Math.random() * (maxX - 40) + 20;
-            const randomY = Math.random() * (maxY - 40) + 20;
 
-            btnNao.style.position = 'fixed';
-            btnNao.style.left = `${randomX}px`;
-            btnNao.style.top = `${randomY}px`;
+            // Gera deslocamentos aleatórios controlados para ele "escorregar" para o lado
+            const offsetX = (Math.random() - 0.5) * 220;
+            const offsetY = (Math.random() - 0.5) * 160;
+
+            currentX += offsetX;
+            currentY += offsetY;
+
+            // Limita para que ele não saia totalmente dos limites da caixinha principal
+            currentX = Math.max(-130, Math.min(130, currentX));
+            currentY = Math.max(-110, Math.min(110, currentY));
+
+            btnNao.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
 
         function selectOption(category, value, element) {
