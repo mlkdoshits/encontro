@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,17 +37,23 @@
             position: relative;
         }
 
-        .emoji-container {
-            font-size: 64px;
-            margin-bottom: 12px;
-            min-height: 80px;
+        .image-container {
+            width: 100%;
+            max-height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .image-container img {
+            max-width: 120px;
+            height: auto;
+            object-fit: contain;
         }
 
         h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -61,14 +67,13 @@
             width: 100%;
             justify-content: center;
             margin-top: 10px;
-            position: relative;
         }
 
         .btn {
             background: linear-gradient(135deg, #ff416c, #ff4b2b);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 12px 0;
             font-size: 16px;
             font-weight: 700;
             border-radius: 8px;
@@ -76,6 +81,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
             flex: 1;
+            text-align: center;
         }
 
         .btn:hover {
@@ -88,7 +94,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
-        /* Grade de opções de comida / vibe */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -156,9 +161,11 @@
 <body>
 
     <div class="card" id="app-card">
-        <!-- TELA 1: Pergunta inicial -->
+        <!-- TELA 1 -->
         <div id="screen-1" class="screen">
-            <div class="emoji-container">🥺🌹</div>
+            <div class="image-container">
+                <img src="https://i.imgur.com/813uO4t.png" alt="Emoji com rosa">
+            </div>
             <h2>Bora marcar um date?</h2>
             <div class="btn-group">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
@@ -166,26 +173,29 @@
             </div>
         </div>
 
-        <!-- TELA 2: Frase romântica/engraçada -->
+        <!-- TELA 2 -->
         <div id="screen-2" class="screen hidden">
-            <div class="emoji-container">✌️😁</div>
-            <h2>Tá bom então, gostosa</h2>
+            <div class="image-container">
+                <img src="https://i.imgur.com/k9b6N4m.png" alt="Emoji Vitoria">
+            </div>
+            <h2>ta bom entao gostosa</h2>
             <button class="btn" onclick="nextScreen(3)" style="margin-top: 15px; width: 100%;">Próximo 💙</button>
         </div>
 
-        <!-- TELA 3: Data e Hora -->
+        <!-- TELA 3 -->
         <div id="screen-3" class="screen hidden">
-            <div class="emoji-container">☕</div>
-            <h2 style="font-size: 17px;">Você cheia de curvas e eu aqui sem freio... me diz aí: quando vai ser o nosso acidente?</h2>
+            <div class="image-container">
+                <img src="https://i.imgur.com/r6w5q2s.png" alt="Emoji Café">
+            </div>
+            <h2 style="font-size: 13px; line-height: 1.4;">Você cheia de curvas e eu aqui sem freio... me diz aí: quando vai ser o nosso acidente?</h2>
             <input type="date" id="data-date" class="input-box" value="2025-06-21">
             <input type="time" id="hora-date" class="input-box" value="19:00">
             <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
         </div>
 
-        <!-- TELA 4: Comida / O que tá afim -->
+        <!-- TELA 4: Opções de comida atualizadas (com Piquenique e Me surpreenda) -->
         <div id="screen-4" class="screen hidden">
-            <div class="emoji-container">🍔</div>
-            <div class="options-grid" id="food-grid">
+            <div class="options-grid" id="food-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 10px;">
                 <div class="option-card" onclick="selectOption('food', 'Hambúrguer', this)"><span>🍔</span>Hambúrguer</div>
                 <div class="option-card" onclick="selectOption('food', 'Sushi', this)"><span>🍱</span>Sushi</div>
                 <div class="option-card" onclick="selectOption('food', 'Massa', this)"><span>🍝</span>Massa</div>
@@ -193,13 +203,12 @@
                 <div class="option-card" onclick="selectOption('food', 'Piquenique', this)"><span>🧺</span>Piquenique</div>
                 <div class="option-card" onclick="selectOption('food', 'Me Surpreenda', this)"><span>🎁</span>Me surpreenda</div>
             </div>
-            <button class="btn" onclick="validateFood()" style="width: 100%;">Escolher prato 🍽️</button>
+            <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 10px;">Escolher prato 🍽️</button>
         </div>
 
         <!-- TELA 5: Vibe -->
         <div id="screen-5" class="screen hidden">
-            <div class="emoji-container">✨</div>
-            <div class="options-grid" id="vibe-grid">
+            <div class="options-grid" id="vibe-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 10px;">
                 <div class="option-card" onclick="selectOption('vibe', 'Pub/Bar', this)"><span>🍻</span>Pub/Bar</div>
                 <div class="option-card" onclick="selectOption('vibe', 'Candlelight', this)"><span>🕯️</span>Candlelight</div>
                 <div class="option-card" onclick="selectOption('vibe', 'Cinema', this)"><span>🍿</span>Cinema</div>
@@ -207,13 +216,14 @@
                 <div class="option-card" onclick="selectOption('vibe', 'Parque', this)"><span>🌳</span>Parque</div>
                 <div class="option-card" onclick="selectOption('vibe', 'Praia', this)"><span>🌊</span>Praia</div>
             </div>
-            <button class="btn" onclick="validateVibe()" style="width: 100%;">Uma vibe legal 🌟</button>
+            <button class="btn" onclick="validateVibe()" style="width: 100%; margin-top: 10px;">Uma vibe legal 🌟</button>
         </div>
 
-        <!-- TELA 6: Resumo e Envio WhatsApp -->
+        <!-- TELA 6: Resumo e Mensagens Meme Aleatórias -->
         <div id="screen-6" class="screen hidden">
-            <div class="emoji-container" id="final-emoji">🤏😏</div>
-            <h2 id="final-title" style="font-size: 18px; color: #ff416c;">falta isso aqui<br>pra gente se beijar</h2>
+            <div class="image-container" id="final-img-container">
+                <img id="final-meme-img" src="https://i.imgur.com/7gK5Y0m.png" alt="Meme final">
+            </div>
             <div class="summary-box">
                 <div>📅 <span id="res-data">21/06/2025</span></div>
                 <div>⏰ <span id="res-hora">19:00</span></div>
@@ -237,7 +247,6 @@
             document.getElementById(`screen-${screenNumber}`).classList.remove('hidden');
 
             if (screenNumber === 6) {
-                // Coletar dados da tela 3
                 const rawDate = document.getElementById('data-date').value;
                 if (rawDate) {
                     const parts = rawDate.split('-');
@@ -250,16 +259,15 @@
                 document.getElementById('res-food').innerText = selectedData.food || 'Não selecionado';
                 document.getElementById('res-vibe').innerText = selectedData.vibe || 'Não selecionado';
 
-                // Sortear frase meme / visual final aleatório
-                const memes = [
-                    { emoji: '🤏😏', title: 'falta isso aqui<br>pra gente se beijar' },
-                    { emoji: '🐧🧮', title: 'não gosto de matemática<br>mas de vc eu conto' },
-                    { emoji: '💙🌷', title: 'TÔ CONTIGO, GATINHA. 💙' },
-                    { emoji: '👍🧢', title: 'AÔÔ<br>COISA BOA' }
+                // Lista de memes aleatórios para a última página conforme o relatório
+                const memesFinais = [
+                    "https://i.imgur.com/7gK5Y0m.png", // Beijinho / Falta isso aqui
+                    "https://i.imgur.com/3Z8q2xL.png", // Pinguim matemática
+                    "https://i.imgur.com/9w2Q1vR.png", // Tô contigo gatinha
+                    "https://i.imgur.com/5f8V1kP.png"  // Aôô coisa boa
                 ];
-                const escolhido = memes[Math.floor(Math.random() * memes.length)];
-                document.getElementById('final-emoji').innerHTML = escolhido.emoji;
-                document.getElementById('final-title').innerHTML = escolhido.title;
+                const escolhido = memesFinais[Math.floor(Math.random() * memesFinais.length)];
+                document.getElementById('final-meme-img').src = escolhido;
             }
         }
 
@@ -279,7 +287,7 @@
 
         function validateFood() {
             if (!selectedData.food) {
-                alert('Selecione uma opção de comida antes de continuar!');
+                alert('Selecione uma opção de comida!');
                 return;
             }
             nextScreen(5);
@@ -287,7 +295,7 @@
 
         function validateVibe() {
             if (!selectedData.vibe) {
-                alert('Selecione a vibe do rolê antes de continuar!');
+                alert('Selecione a vibe do rolê!');
                 return;
             }
             nextScreen(6);
