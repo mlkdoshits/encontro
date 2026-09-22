@@ -1,19 +1,12 @@
-async function verificarSenha() {
-    const senhaDigitada = document.getElementById('input-senha').value;
-    
-    // Converte a senha digitada em bytes
-    const msgBuffer = new TextEncoder().encode(senhaDigitada);
-    // Gera o hash SHA-256
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const senhaHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+const express = require('express');
+const path = require('path');
+const app = express();
 
-    // Hash correspondente à senha secreta
-    const hashCorreto = 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f';
+const PORT = process.env.PORT || 3000;
 
-    if (senhaHash === hashCorreto) {
-        nextScreen(1);
-    } else {
-        alert('Senha incorreta! Tente novamente.');
-    }
-}
+// Servir arquivos estáticos (HTML, imagens, etc.) da raiz do projeto
+app.use(express.static(path.join(__dirname, '.')));
+
+app.listen(PORT, () => {
+    console.log(`Servidor a rodar na porta ${PORT}`);
+});
