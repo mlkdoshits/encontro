@@ -194,7 +194,7 @@
             <h2>Bora marcar um date?</h2>
             <div class="btn-group" id="btn-group-container">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
-                <button class="btn btn-nao" id="btn-nao" onmouseenter="fugir()" ontouchstart="fugir()">Não</button>
+                <button class="btn btn-nao" id="btn-nao" onmouseenter="fugir(event)" ontouchstart="fugir(event)">Não</button>
             </div>
         </div>
 
@@ -306,19 +306,32 @@
         let currentX = 0;
         let currentY = 0;
 
-        function fugir() {
+        function fugir(e) {
+            if (e.type === 'touchstart') {
+                e.preventDefault(); // Evita o clique em telas touch
+            }
+            
             const btnNao = document.getElementById('btn-nao');
 
-            // Garante saltos eficientes para afastar o botão rapidamente do cursor
+            // Identifica se é dispositivo móvel (por largura de tela ou toque)
+            const isMobile = window.innerWidth <= 768 || e.type === 'touchstart';
+
+            // No mobile, a distância de fuga é bem maior para garantir que o dedo não alcance
+            const multiplierX = isMobile ? 220 : 130;
+            const multiplierY = isMobile ? 180 : 100;
+
             const dirX = Math.random() > 0.5 ? 1 : -1;
             const dirY = Math.random() > 0.5 ? 1 : -1;
 
-            currentX += dirX * (Math.random() * 100 + 80);
-            currentY += dirY * (Math.random() * 80 + 60);
+            currentX += dirX * (Math.random() * multiplierX + 60);
+            currentY += dirY * (Math.random() * multiplierY + 50);
 
-            // Mantém dentro de limites seguros para não sumir da tela do cartão
-            currentX = Math.max(-140, Math.min(140, currentX));
-            currentY = Math.max(-120, Math.min(120, currentY));
+            // Limites de deslocamento ajustados para cada ambiente
+            const limitX = isMobile ? 150 : 140;
+            const limitY = isMobile ? 220 : 120;
+
+            currentX = Math.max(-limitX, Math.min(limitX, currentX));
+            currentY = Math.max(-limitY, Math.min(limitY, currentY));
 
             btnNao.style.transform = `translate(${currentX}px, ${currentY}px)`;
         }
