@@ -98,8 +98,7 @@
             box-shadow: none !important;
             flex: 1;
             position: relative;
-            /* Uma transição muito rápida de 0.1s garante que o rato perca o botão com suavidade */
-            transition: transform 0.1s ease-out !important; 
+            transition: transform 0.1s ease-out !important;
         }
 
         .btn-nao:hover {
@@ -173,7 +172,6 @@
 <body>
 
     <div class="card" id="app-card">
-        <!-- Tela 1: Bora marcar um date? -->
         <div id="screen-1" class="screen">
             <div class="image-container">
                 <img src="img/rosas.png" alt="Bora marcar um date">
@@ -181,12 +179,10 @@
             <h2>Bora marcar um date?</h2>
             <div class="btn-group" id="btn-group-container">
                 <button class="btn" onclick="nextScreen(2)">Sim</button>
-                <!-- Adicionado onmouseenter e onclick para garantir a fuga -->
                 <button class="btn btn-nao" id="btn-nao" onmouseenter="teletransportar(event)" onclick="teletransportar(event)" ontouchstart="teletransportar(event)">Não</button>
             </div>
         </div>
 
-        <!-- Tela 2 -->
         <div id="screen-2" class="screen hidden">
             <div class="image-container">
                 <img src="img/vitoria.png" alt="Ta bom entao gostosa">
@@ -194,7 +190,6 @@
             <button class="btn" onclick="nextScreen(3)" style="width: 100%;">Próximo 💙</button>
         </div>
 
-        <!-- Tela 3 -->
         <div id="screen-3" class="screen hidden">
             <div class="image-container">
                 <img src="img/cafe.png" alt="Café e curvas">
@@ -204,7 +199,6 @@
             <button class="btn" onclick="nextScreen(4)" style="width: 100%;">Selecionar a data 🚀</button>
         </div>
 
-        <!-- Tela 4 -->
         <div id="screen-4" class="screen hidden">
             <div class="options-grid" id="food-grid" style="margin-top: 5px;">
                 <div class="option-card" onclick="selectOption('food', 'Hambúrguer', this)"><span>🍔</span>Hambúrguer</div>
@@ -217,7 +211,6 @@
             <button class="btn" onclick="validateFood()" style="width: 100%; margin-top: 5px;">Escolher prato 🍽️</button>
         </div>
 
-        <!-- Tela 5 -->
         <div id="screen-5" class="screen hidden">
             <div class="image-container" id="final-img-container">
                 <img id="final-meme-img" src="img/meme1.png" alt="Meme final">
@@ -252,7 +245,7 @@
 
         function nextScreen(screenNumber) {
             document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-            
+
             const targetId = `screen-${screenNumber}`;
             document.getElementById(targetId).classList.remove('hidden');
 
@@ -269,10 +262,10 @@
                 document.getElementById('res-food').innerText = selectedData.food || 'Não selecionado';
 
                 const memesFinais = [
-                    "img/meme1.png", 
-                    "img/meme2.png", 
-                    "img/meme3.png", 
-                    "img/meme4.png"  
+                    "img/meme1.png",
+                    "img/meme2.png",
+                    "img/meme3.png",
+                    "img/meme4.png"
                 ];
                 const escolhido = memesFinais[Math.floor(Math.random() * memesFinais.length)];
                 document.getElementById('final-meme-img').src = escolhido;
@@ -292,7 +285,6 @@
 
             let randomX, randomY;
 
-            // Obriga a que o botão salte pelo menos 60px para longe, evitando que fique "preso" no lugar
             do {
                 randomX = (Math.random() * 2 - 1) * limitX;
                 randomY = (Math.random() * 2 - 1) * limitY;
