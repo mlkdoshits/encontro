@@ -3,9 +3,8 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Servir arquivos estáticos da pasta atual
 app.use(express.static(path.join(__dirname)));
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor a funcionar na porta ${PORT}`);
 });
